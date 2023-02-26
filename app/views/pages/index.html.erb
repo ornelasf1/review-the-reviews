@@ -1,0 +1,387 @@
+<!-- Page wrapper -->
+<div class="flex flex-col min-h-screen overflow-hidden">
+
+    <!-- Site header -->
+    <header class="absolute w-full z-30 dark">
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+            <div class="flex items-center justify-between h-16 md:h-20">
+
+                <!-- Site branding -->
+                <div class="shrink-0 mr-4">
+                    <!-- Logo -->
+                    <a class="block text-blue-600 transition duration-150 ease-in-out" href="index.html" aria-label="Cruip">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.25 4.116c.039.899-.51.468-.79.629-.894.524-1.491 2.04-2.612 2.125-.423.87-1.121.898-1.874 1.503-.327.256-.463.839-.756 1.097l-3.694 3.27a2.395 2.395 0 0 1-.44.314c-.378.219-.656.717-1.096.81-.475.106-1.601-.775-2.633-2.012-.825-1.587-.025-1.924.518-2.525.916-1.022 2.48-2.064 3.585-2.753.843-.537 1.677-1.13 2.59-1.482.935-.357 1.779-.842 2.738-1.041.7-.141 1.522.063 2.206 0a9.596 9.596 0 0 1 2.258.065M30.676 3.646c-.06 1.046-1.038.955-1.593 1.363C27.32 6.31 25.8 8.656 23.63 9.583c-1.07 1.412-2.411 1.952-4.056 3.254-.711.56-1.21 1.417-1.877 1.965-2.887 2.381-5.668 4.524-8.64 6.823-.303.236-.646.468-1.008.697-.834.528-1.675 1.394-2.543 1.77-.95.413-2.376-.279-3.375-1.544-.43-1.849 1.112-2.657 2.38-3.737 2.13-1.82 5.33-4.012 7.558-5.536 1.707-1.17 3.395-2.426 5.138-3.43 1.789-1.03 3.439-2.179 5.224-3.063 1.303-.643 2.758-.96 4.038-1.53a40.762 40.762 0 0 1 4.207-1.606M30.386 14.346c.229.918-.566.8-.896 1.136-1.048 1.058-1.721 3.056-3.254 3.7-.563 1.17-1.522 1.532-2.603 2.507-.464.426-.731 1.128-1.177 1.542-1.94 1.77-3.91 3.263-6.082 4.772a6.36 6.36 0 0 1-.748.43c-.618.313-1.24.914-1.901 1.065-.731.161-1.856-.807-2.662-2.199-.401-1.784.715-2.129 1.6-2.818 1.49-1.15 3.693-2.49 5.192-3.486 1.154-.755 2.247-1.633 3.417-2.292 1.2-.68 2.244-1.52 3.44-2.128.868-.448 1.927-.61 2.79-1.029.92-.447 1.873-.85 2.884-1.2" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Desktop navigation -->
+                <nav class="hidden md:flex md:grow">
+
+                    <!-- Desktop menu links -->
+                    <ul class="flex grow justify-start flex-wrap items-center">
+                        <li>
+                            <a class="font-medium text-slate-800 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-600 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out" href="pricing.html">Pricing</a>
+                        </li>
+                        <li>
+                            <a class="font-medium text-slate-800 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-600 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out" href="about.html">About</a>
+                        </li>
+                        <li>
+                            <a class="font-medium text-slate-800 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-600 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out" href="blog.html">Blog</a>
+                        </li>
+                        <li>
+                            <a class="font-medium text-slate-800 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-600 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out" href="wall-of-love.html">Wall of Love</a>
+                        </li>
+                        <!-- 1st level: hover -->
+                        <li
+                            class="relative"
+                            x-data="{ open: false }"
+                            @mouseenter="open = true"
+                            @mouseleave="open = false"
+                        >
+                            <a
+                                class="font-medium text-slate-800 dark:text-slate-400 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
+                                href="#0"
+                                aria-haspopup="true"
+                                :aria-expanded="open"
+                                @focus="open = true"
+                                @focusout="open = false"
+                                @click.prevent
+                            >
+                                Resources
+                                <svg class="w-3 h-3 fill-current text-slate-400 dark:text-slate-500 cursor-pointer ml-1 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.28 4.305L5.989 8.598 1.695 4.305A1 1 0 00.28 5.72l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z" />
+                                </svg>
+                            </a>
+                            <!-- 2nd level: hover -->
+                            <ul
+                                class="origin-top-right absolute top-full right-0 w-40 bg-white py-2 ml-4 rounded shadow-lg"
+                                x-show="open"
+                                x-transition:enter="transition ease-out duration-200 transform"
+                                x-transition:enter-start="opacity-0 -translate-y-2"
+                                x-transition:enter-end="opacity-100 translate-y-0"
+                                x-transition:leave="transition ease-out duration-200"
+                                x-transition:leave-start="opacity-100"
+                                x-transition:leave-end="opacity-0"
+                                x-cloak
+                            >
+                                <li>
+                                    <a class="font-medium text-sm text-slate-600 hover:text-blue-600 flex py-2 px-5 leading-tight" href="404.html" @focus="open = true" @focusout="open = false">404</a>
+                                </li>
+                                <li>
+                                    <a class="font-medium text-sm text-slate-600 hover:text-blue-600 flex py-2 px-5 leading-tight" href="support.html" @focus="open = true" @focusout="open = false">Support</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- Desktop sign in links -->
+                    <ul class="flex grow justify-end flex-wrap items-center">
+                        <li>
+                            <a class="font-medium text-slate-800 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-600 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out" href="signin.html">Sign in</a>
+                        </li>
+                        <li>
+                            <a class="font-medium text-blue-600 dark:text-slate-300 dark:hover:text-white px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out group" href="request-demo.html">Request Demo <span class="tracking-normal text-blue-600 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span></a>
+                        </li>
+                    </ul>
+
+                </nav>
+
+                <!-- Mobile menu -->
+                <div class="flex md:hidden" x-data="{ expanded: false }">
+
+                    <!-- Hamburger button -->
+                    <button
+                        class="hamburger"
+                        :class="{ 'active': expanded }"
+                        @click.stop="expanded = !expanded"
+                        aria-controls="mobile-nav"
+                        :aria-expanded="expanded"
+                    >
+                        <span class="sr-only">Menu</span>
+                        <svg class="w-6 h-6 fill-current text-slate-900 dark:text-slate-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <rect y="4" width="24" height="2" />
+                            <rect y="11" width="24" height="2" />
+                            <rect y="18" width="24" height="2" />
+                        </svg>
+                    </button>
+
+                    <!-- Mobile navigation -->
+                    <nav
+                        id="mobile-nav"
+                        class="absolute top-full h-screen pb-16 z-20 left-0 w-full overflow-scroll no-scrollbar bg-white"
+                        @click.away="expanded = false"
+                        @keydown.escape.window="expanded = false"
+                        x-show="expanded"
+                        x-transition:enter="transition ease-out duration-200 transform"
+                        x-transition:enter-start="opacity-0 -translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-out duration-200"
+                        x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0"
+                        x-cloak
+                    >
+                        <ul class="px-5 py-2">
+                            <li>
+                                <a class="flex font-medium text-slate-800 hover:text-blue-600 py-2" href="pricing.html">Pricing</a>
+                            </li>
+                            <li>
+                                <a class="flex font-medium text-slate-800 hover:text-blue-600 py-2" href="about.html">About</a>
+                            </li>
+                            <li>
+                                <a class="flex font-medium text-slate-800 hover:text-blue-600 py-2" href="blog.html">Blog</a>
+                            </li>
+                            <li>
+                                <a class="flex font-medium text-slate-800 hover:text-blue-600 py-2" href="wall-of-love.html">Wall of Love</a>
+                            </li>
+                            <li class="py-2 my-2 border-t border-b border-slate-200">
+                                <span class="flex font-medium text-slate-800 hover:text-blue-600 py-2">Resources</span>
+                                <ul class="pl-4">
+                                    <li>
+                                        <a class="text-sm flex font-medium text-slate-600 hover:text-blue-600 py-2" href="404.html">404</a>
+                                    </li>
+                                    <li>
+                                        <a class="text-sm flex font-medium text-slate-600 hover:text-blue-600 py-2" href="support.html">Support</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="flex font-medium w-full text-slate-800 hover:text-blue-600 py-2" href="signin.html">Sign in</a>
+                            </li>
+                            <li>
+                                <a class="flex font-medium text-blue-600 py-2 group" href="request-demo.html">Request Demo <span class="tracking-normal text-blue-600 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="grow">
+
+        <!-- Hero -->
+        <section class="relative">
+
+            <!-- Dark background -->
+            <div class="absolute inset-0 bg-slate-900 pointer-events-none -z-10 [clip-path:polygon(0_0,_5760px_0,_5760px_calc(100%_-_352px),_0_100%)]" aria-hidden="true"></div>
+
+            <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="pt-32 pb-20 md:pt-40 md:pb-44">
+
+                    <!-- Hero content -->
+                    <div class="max-w-xl mx-auto md:max-w-none md:flex md:items-center md:space-x-8 lg:space-x-16 xl:space-x-20 space-y-16 md:space-y-0">
+
+                        <!-- Content -->
+                        <div class="text-center md:text-left md:min-w-[30rem]" data-aos="fade-right">
+                            <h1 class="h1 font-playfair-display text-slate-100 mb-4">Create stunning pooping experiences</h1>
+                            <p class="text-xl text-slate-400 mb-8">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
+                            <div class="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                                <div>
+                                    <a class="btn text-white bg-blue-600 hover:bg-blue-700 w-full group" href="request-demo.html">
+                                        Request Demo <span class="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btn text-white bg-slate-700 hover:bg-slate-800 w-full" href="#0">Explore Product</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hero image -->
+                        <div x-data="{ modalExpanded: false }"  data-aos="fade-left">
+                            <!-- Image -->
+                            <div class="flex justify-center items-center">
+                                <div class="relative">
+                                    <div class="absolute inset-0 pointer-events-none border-2 border-slate-700 mt-3 ml-3 translate-x-4 translate-y-4 -z-10" aria-hidden="true"></div>
+                                    <img class="mx-auto md:max-w-none" src="./images/hero-image-01.jpg" width="540" height="405" alt="Hero" />
+                                </div>
+                                <button class="absolute group" @click.prevent="modalExpanded = true" aria-controls="modal">
+                                    <svg class="w-16 h-16 fill-current sm:w-20 sm:h-20 group" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="text-white opacity-80 group-hover:opacity-100 transition duration-150 ease-in-out" cx="44" cy="44" r="44" />
+                                        <path class="text-blue-600" d="M52 44a.999.999 0 00-.427-.82l-10-7A1 1 0 0040 37V51a.999.999 0 001.573.82l10-7A.995.995 0 0052 44V44c0 .001 0 .001 0 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Modal backdrop -->
+                            <div
+                                class="fixed inset-0 z-50 bg-black bg-opacity-75 transition-opacity"
+                                x-show="modalExpanded"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0"
+                                x-transition:enter-end="opacity-100"
+                                x-transition:leave="transition ease-out duration-100"
+                                x-transition:leave-start="opacity-100"
+                                x-transition:leave-end="opacity-0"
+                                aria-hidden="true"
+                                x-cloak
+                            ></div>
+
+                            <!-- Modal dialog -->
+                            <div
+                                id="modal"
+                                class="fixed inset-0 z-50 overflow-hidden flex items-center justify-center px-4 sm:px-6"
+                                role="dialog"
+                                aria-modal="true"
+                                aria-labelledby="modal-headline"
+                                x-show="modalExpanded"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 scale-95"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                x-transition:leave="transition ease-out duration-200"
+                                x-transition:leave-start="opacity-100 scale-100"
+                                x-transition:leave-end="opacity-0 scale-95"
+                                x-cloak
+                            >
+                                <div class="bg-white overflow-auto max-w-6xl w-full max-h-full" @click.away="modalExpanded = false" @keydown.escape.window="modalExpanded = false">
+                                    <iframe class="w-full aspect-video" src="https://player.vimeo.com/video/174002812" title="Video" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Site footer -->
+    <footer>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            <!-- Top area: Blocks -->
+            <div class="grid sm:grid-cols-12 gap-8 py-8 md:py-12">
+
+                <!-- 1st block -->
+                <div class="sm:col-span-12 lg:col-span-4 lg:max-w-xs">
+                    <div class="mb-2">
+                        <!-- Logo -->
+                        <a class="inline-flex text-blue-600 transition duration-150 ease-in-out" href="index.html" aria-label="Cruip">
+                            <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.25 4.116c.039.899-.51.468-.79.629-.894.524-1.491 2.04-2.612 2.125-.423.87-1.121.898-1.874 1.503-.327.256-.463.839-.756 1.097l-3.694 3.27a2.395 2.395 0 0 1-.44.314c-.378.219-.656.717-1.096.81-.475.106-1.601-.775-2.633-2.012-.825-1.587-.025-1.924.518-2.525.916-1.022 2.48-2.064 3.585-2.753.843-.537 1.677-1.13 2.59-1.482.935-.357 1.779-.842 2.738-1.041.7-.141 1.522.063 2.206 0a9.596 9.596 0 0 1 2.258.065M30.676 3.646c-.06 1.046-1.038.955-1.593 1.363C27.32 6.31 25.8 8.656 23.63 9.583c-1.07 1.412-2.411 1.952-4.056 3.254-.711.56-1.21 1.417-1.877 1.965-2.887 2.381-5.668 4.524-8.64 6.823-.303.236-.646.468-1.008.697-.834.528-1.675 1.394-2.543 1.77-.95.413-2.376-.279-3.375-1.544-.43-1.849 1.112-2.657 2.38-3.737 2.13-1.82 5.33-4.012 7.558-5.536 1.707-1.17 3.395-2.426 5.138-3.43 1.789-1.03 3.439-2.179 5.224-3.063 1.303-.643 2.758-.96 4.038-1.53a40.762 40.762 0 0 1 4.207-1.606M30.386 14.346c.229.918-.566.8-.896 1.136-1.048 1.058-1.721 3.056-3.254 3.7-.563 1.17-1.522 1.532-2.603 2.507-.464.426-.731 1.128-1.177 1.542-1.94 1.77-3.91 3.263-6.082 4.772a6.36 6.36 0 0 1-.748.43c-.618.313-1.24.914-1.901 1.065-.731.161-1.856-.807-2.662-2.199-.401-1.784.715-2.129 1.6-2.818 1.49-1.15 3.693-2.49 5.192-3.486 1.154-.755 2.247-1.633 3.417-2.292 1.2-.68 2.244-1.52 3.44-2.128.868-.448 1.927-.61 2.79-1.029.92-.447 1.873-.85 2.884-1.2" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="text-lg font-bold text-slate-800">The smarter way to start your next idea.</div>
+                </div>
+
+                <!-- 2nd block -->
+                <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
+                    <h6 class="text-sm text-slate-800 font-semibold mb-2">How it works</h6>
+                    <ul class="text-sm font-medium space-y-2">
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Overview</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Pricing</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Service Areas</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 3rd block -->
+                <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
+                    <h6 class="text-sm text-slate-800 font-semibold mb-2">Resources</h6>
+                    <ul class="text-sm font-medium space-y-2">
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Customer Stories</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Knowledge Base</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 4th block -->
+                <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
+                    <h6 class="text-sm text-slate-800 font-semibold mb-2">Products</h6>
+                    <ul class="text-sm font-medium space-y-2">
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Corporate Partners</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Secure Identity</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Legal Help</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">First Capital</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 5th block -->
+                <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
+                    <h6 class="text-sm text-slate-800 font-semibold mb-2">Company</h6>
+                    <ul class="text-sm font-medium space-y-2">
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">About Us</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Careers</a>
+                        </li>
+                        <li>
+                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom area -->
+            <div class="md:flex md:items-center md:justify-between py-6 md:py-8 border-t border-slate-200">
+
+                <!-- Social links -->
+                <ul class="flex space-x-6 mb-4 md:order-1 md:ml-4 md:mb-0">
+                    <li>
+                        <a class="text-blue-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0" aria-label="Twitter">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 3.897c-.75.33-1.5.577-2.333.66A4.4 4.4 0 0 0 19.5 2.33c-.833.495-1.667.825-2.583.99a4.053 4.053 0 0 0-3-1.32c-2.25 0-4.084 1.814-4.084 4.041 0 .33 0 .66.084.907-3.5-.164-6.5-1.814-8.5-4.288C1 3.32.833 3.98.833 4.722c0 1.402.75 2.639 1.834 3.381-.667 0-1.334-.165-1.834-.495v.083c0 1.98 1.417 3.629 3.25 3.958-.333.083-.666.165-1.083.165-.25 0-.5 0-.75-.082.5 1.65 2 2.804 3.833 2.804C4.667 15.608 2.917 16.268 1 16.268c-.333 0-.667 0-1-.082C1.833 17.34 4 18 6.25 18c7.583 0 11.667-6.186 11.667-11.546v-.495c.833-.578 1.5-1.32 2.083-2.062Z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-blue-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0" aria-label="Facebook">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 10.025C20 4.491 15.52 0 10 0S0 4.491 0 10.025c0 4.852 3.44 8.892 8 9.825v-6.817H6v-3.008h2V7.52a3.508 3.508 0 0 1 3.5-3.509H14v3.008h-2c-.55 0-1 .45-1 1.002v2.005h3v3.008h-3V20c5.05-.501 9-4.772 9-9.975Z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-blue-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0" aria-label="Telegram">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.96 2.336a.421.421 0 0 0-.291-.308 1.543 1.543 0 0 0-.788.054S1.358 8.194.358 8.87c-.215.145-.288.23-.324.33-.173.485.366.694.366.694l4.517 1.428a.506.506 0 0 0 .229-.013c1.026-.63 10.332-6.335 10.873-6.527.083-.024.148 0 .131.061-.215.732-8.257 7.664-8.301 7.706a.16.16 0 0 0-.06.143l-.422 4.28s-.176 1.331 1.196 0a38.082 38.082 0 0 1 2.374-2.11c1.553 1.041 3.224 2.192 3.945 2.794.245.23.576.354.916.342.426-.05.774-.35.876-.754 0 0 3.192-12.471 3.298-14.142.011-.162.025-.268.027-.38.005-.13-.008-.26-.04-.387Z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-blue-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0" aria-label="Github">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.041 0C4.52 0 0 4.612 0 10.25c0 4.526 2.845 8.37 6.862 9.737.502.085.669-.257.669-.513v-1.708c-2.761.598-3.347-1.367-3.347-1.367-.419-1.196-1.088-1.537-1.088-1.537-1.004-.598 0-.598 0-.598 1.004.085 1.506 1.025 1.506 1.025.92 1.537 2.343 1.11 2.929.854.084-.683.335-1.11.67-1.367-2.26-.256-4.603-1.11-4.603-5.039 0-1.11.419-2.05 1.004-2.733 0-.342-.418-1.367.168-2.733 0 0 .836-.257 2.76 1.025.838-.257 1.674-.342 2.511-.342.837 0 1.674.085 2.51.342 1.925-1.367 2.762-1.025 2.762-1.025.586 1.452.167 2.477.084 2.733.669.683 1.004 1.623 1.004 2.733 0 3.93-2.343 4.783-4.603 5.04.335.341.67.939.67 1.879v2.818c0 .256.167.598.67.513 4.016-1.367 6.86-5.21 6.86-9.737C20.084 4.612 15.565 0 10.042 0Z" />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Copyrights note -->
+                <div class="text-sm text-slate-500 mr-4">&copy; Cruip.com. All rights reserved.</div>
+
+            </div>
+
+        </div>
+    </footer>
+
+</div>

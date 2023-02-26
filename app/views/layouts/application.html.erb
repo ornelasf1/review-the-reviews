@@ -9,11 +9,13 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link href="./css/vendors/aos.css" rel="stylesheet">
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="font-inter antialiased bg-white text-slate-800 tracking-tight">
       <%= yield %>
-    </main>
+      <script src="./js/vendors/alpinejs.min.js" defer></script>
+      <script src="./js/vendors/aos.js"></script>
+      <script src="./js/main.js"></script>
   </body>
 </html>
