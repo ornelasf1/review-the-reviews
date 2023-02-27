@@ -174,172 +174,53 @@
                 <div class="pt-32 pb-20 md:pt-40 md:pb-44">
 
                     <!-- Hero content -->
-                    <div class="max-w-xl mx-auto md:max-w-none md:flex md:items-center md:space-x-8 lg:space-x-16 xl:space-x-20 space-y-16 md:space-y-0">
+                    <div class="flex flex-col items-center">
 
-                        <!-- Content -->
-                        <div class="text-center md:text-left md:min-w-[30rem]" data-aos="fade-right">
-                            <h1 class="h1 font-playfair-display text-slate-100 mb-4">Create stunning pooping experiences</h1>
-                            <p class="text-xl text-slate-400 mb-8">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
-                            <div class="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-                                <div>
-                                    <a class="btn text-white bg-blue-600 hover:bg-blue-700 w-full group" href="request-demo.html">
-                                        Request Demo <span class="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a class="btn text-white bg-slate-700 hover:bg-slate-800 w-full" href="#0">Explore Product</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Hero image -->
-                        <div x-data="{ modalExpanded: false }"  data-aos="fade-left">
-                            <!-- Image -->
-                            <div class="flex justify-center items-center">
-                                <div class="relative">
-                                    <div class="absolute inset-0 pointer-events-none border-2 border-slate-700 mt-3 ml-3 translate-x-4 translate-y-4 -z-10" aria-hidden="true"></div>
-                                    <img class="mx-auto md:max-w-none" src="./images/hero-image-01.jpg" width="540" height="405" alt="Hero" />
-                                </div>
-                                <button class="absolute group" @click.prevent="modalExpanded = true" aria-controls="modal">
-                                    <svg class="w-16 h-16 fill-current sm:w-20 sm:h-20 group" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
-                                        <circle class="text-white opacity-80 group-hover:opacity-100 transition duration-150 ease-in-out" cx="44" cy="44" r="44" />
-                                        <path class="text-blue-600" d="M52 44a.999.999 0 00-.427-.82l-10-7A1 1 0 0040 37V51a.999.999 0 001.573.82l10-7A.995.995 0 0052 44V44c0 .001 0 .001 0 0z" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <!-- Modal backdrop -->
-                            <div
-                                class="fixed inset-0 z-50 bg-black bg-opacity-75 transition-opacity"
-                                x-show="modalExpanded"
-                                x-transition:enter="transition ease-out duration-200"
-                                x-transition:enter-start="opacity-0"
-                                x-transition:enter-end="opacity-100"
-                                x-transition:leave="transition ease-out duration-100"
-                                x-transition:leave-start="opacity-100"
-                                x-transition:leave-end="opacity-0"
-                                aria-hidden="true"
-                                x-cloak
-                            ></div>
-
-                            <!-- Modal dialog -->
-                            <div
-                                id="modal"
-                                class="fixed inset-0 z-50 overflow-hidden flex items-center justify-center px-4 sm:px-6"
-                                role="dialog"
-                                aria-modal="true"
-                                aria-labelledby="modal-headline"
-                                x-show="modalExpanded"
-                                x-transition:enter="transition ease-out duration-200"
-                                x-transition:enter-start="opacity-0 scale-95"
-                                x-transition:enter-end="opacity-100 scale-100"
-                                x-transition:leave="transition ease-out duration-200"
-                                x-transition:leave-start="opacity-100 scale-100"
-                                x-transition:leave-end="opacity-0 scale-95"
-                                x-cloak
-                            >
-                                <div class="bg-white overflow-auto max-w-6xl w-full max-h-full" @click.away="modalExpanded = false" @keydown.escape.window="modalExpanded = false">
-                                    <iframe class="w-full aspect-video" src="https://player.vimeo.com/video/174002812" title="Video" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                                </div>
-                            </div>
-
-                        </div>
+                        <h1 class="h1 font-pacifico text-slate-100">Review The Reviewers</h1>
                     </div>
 
                 </div>
             </div>
         </section>
+        <section class="relative">
+          <div class="relative max-w-6xl mx-auto my-4 pl-16">
+            <h3 class="text-lg font-semibold">Reviewers by Category</h3>
+
+          </div>
+          <div class="flex max-w-4xl mx-auto flex-wrap justify-around">
+            <button class="w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
+              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Video Games</p>
+            </button>
+            <button class="w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
+              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Tabletop Games</p>
+            </button>
+            <button class="w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
+              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Cars & Other Vehicles</p>
+            </button>
+            <button class="w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
+              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Computer Software</p>
+            </button>
+            <button class="w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
+              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Mobile Apps</p>
+            </button>
+            <button class="w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
+              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Computers & Smartphones</p>
+            </button>
+            <button class="w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
+              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Restaurants</p>
+            </button>
+            <button class="w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
+              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Foods</p>
+            </button>
+          </div>
+        </section>
 
     </main>
+
 
     <!-- Site footer -->
     <footer>
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-
-            <!-- Top area: Blocks -->
-            <div class="grid sm:grid-cols-12 gap-8 py-8 md:py-12">
-
-                <!-- 1st block -->
-                <div class="sm:col-span-12 lg:col-span-4 lg:max-w-xs">
-                    <div class="mb-2">
-                        <!-- Logo -->
-                        <a class="inline-flex text-blue-600 transition duration-150 ease-in-out" href="index.html" aria-label="Cruip">
-                            <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15.25 4.116c.039.899-.51.468-.79.629-.894.524-1.491 2.04-2.612 2.125-.423.87-1.121.898-1.874 1.503-.327.256-.463.839-.756 1.097l-3.694 3.27a2.395 2.395 0 0 1-.44.314c-.378.219-.656.717-1.096.81-.475.106-1.601-.775-2.633-2.012-.825-1.587-.025-1.924.518-2.525.916-1.022 2.48-2.064 3.585-2.753.843-.537 1.677-1.13 2.59-1.482.935-.357 1.779-.842 2.738-1.041.7-.141 1.522.063 2.206 0a9.596 9.596 0 0 1 2.258.065M30.676 3.646c-.06 1.046-1.038.955-1.593 1.363C27.32 6.31 25.8 8.656 23.63 9.583c-1.07 1.412-2.411 1.952-4.056 3.254-.711.56-1.21 1.417-1.877 1.965-2.887 2.381-5.668 4.524-8.64 6.823-.303.236-.646.468-1.008.697-.834.528-1.675 1.394-2.543 1.77-.95.413-2.376-.279-3.375-1.544-.43-1.849 1.112-2.657 2.38-3.737 2.13-1.82 5.33-4.012 7.558-5.536 1.707-1.17 3.395-2.426 5.138-3.43 1.789-1.03 3.439-2.179 5.224-3.063 1.303-.643 2.758-.96 4.038-1.53a40.762 40.762 0 0 1 4.207-1.606M30.386 14.346c.229.918-.566.8-.896 1.136-1.048 1.058-1.721 3.056-3.254 3.7-.563 1.17-1.522 1.532-2.603 2.507-.464.426-.731 1.128-1.177 1.542-1.94 1.77-3.91 3.263-6.082 4.772a6.36 6.36 0 0 1-.748.43c-.618.313-1.24.914-1.901 1.065-.731.161-1.856-.807-2.662-2.199-.401-1.784.715-2.129 1.6-2.818 1.49-1.15 3.693-2.49 5.192-3.486 1.154-.755 2.247-1.633 3.417-2.292 1.2-.68 2.244-1.52 3.44-2.128.868-.448 1.927-.61 2.79-1.029.92-.447 1.873-.85 2.884-1.2" />
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="text-lg font-bold text-slate-800">The smarter way to start your next idea.</div>
-                </div>
-
-                <!-- 2nd block -->
-                <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h6 class="text-sm text-slate-800 font-semibold mb-2">How it works</h6>
-                    <ul class="text-sm font-medium space-y-2">
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Overview</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Pricing</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Service Areas</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- 3rd block -->
-                <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h6 class="text-sm text-slate-800 font-semibold mb-2">Resources</h6>
-                    <ul class="text-sm font-medium space-y-2">
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Customer Stories</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Knowledge Base</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- 4th block -->
-                <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h6 class="text-sm text-slate-800 font-semibold mb-2">Products</h6>
-                    <ul class="text-sm font-medium space-y-2">
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Corporate Partners</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Secure Identity</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Legal Help</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">First Capital</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- 5th block -->
-                <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h6 class="text-sm text-slate-800 font-semibold mb-2">Company</h6>
-                    <ul class="text-sm font-medium space-y-2">
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">About Us</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Careers</a>
-                        </li>
-                        <li>
-                            <a class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out" href="#0">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
 
             <!-- Bottom area -->
             <div class="md:flex md:items-center md:justify-between py-6 md:py-8 border-t border-slate-200">
@@ -375,9 +256,6 @@
                         </a>
                     </li>
                 </ul>
-
-                <!-- Copyrights note -->
-                <div class="text-sm text-slate-500 mr-4">&copy; Cruip.com. All rights reserved.</div>
 
             </div>
 
