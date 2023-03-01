@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_062818) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_01_025609) do
   create_table "reviewers", force: :cascade do |t|
     t.string "name"
     t.text "review"
@@ -21,4 +21,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_062818) do
     t.string "category"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "commenter"
+    t.text "body"
+    t.integer "reviewer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
+  end
+
+  add_foreign_key "reviews", "reviewers"
 end

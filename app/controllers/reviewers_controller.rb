@@ -9,5 +9,6 @@ class ReviewersController < ApplicationController
   end
 
   def show
+    @reviewer = Reviewer.find(params[:id])
   end
 end
