@@ -1,0 +1,77 @@
+<!-- Page wrapper -->
+<div class="flex flex-col min-h-screen overflow-hidden">
+  <%= render 'shared/header' %>
+
+  <main class="grow">
+    <section class="relative">
+      <div class="max-w-6xl mx-auto px-4 pt-20">
+        <h3 class="h3"><%= $pageTitleMap[params[:category].to_sym] %> Reviewers</h3>
+      </div>
+    </section>
+    <section class="relative">
+      <div class="flex flex-row items-center max-w-6xl mx-auto px-4 pt-10">
+        <h5 class="h5 mr-10">Choose platform:</h5>
+        <div class="grid grid-cols-2 divide-x gap-4">
+          <h4 class="h4 font-semibold text-sky-700 text-center cursor-pointer">Websites</h4>
+          <h4 class="h4 font-light pl-8 text-center cursor-pointer">Streamers</h4>
+        </div>
+      </div>
+    </section>
+    <section class="relative">
+      <div class="flex flex-row items-center max-w-6xl mx-auto px-4 pt-10">
+        <div class="grow grid grid-cols-8">
+          <div class="flex flex-row items-end col-start-1 col-span-7 gap-4">
+            <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-sky-600 border-2 drop-shadow-sm hover:bg-slate-50">
+              Best Rated
+            </button>
+            <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
+              Unrated
+            </button>
+            <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
+              Most Active
+            </button>
+            <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
+              Most Popular
+            </button>
+          </div>
+          <div class="col-start-8 col-span-1">
+            <p>Sort by: Rating</p>
+            <button class="btn border-sky-600 py-1 px-2 col-span-1 text-xs text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
+              Lowest to Highest
+            </button>
+            <button class="btn mt-1 py-1 px-2 col-span-1 text-xs text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
+              Highest to Lowest
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="relative">
+      <div class="max-w-6xl mx-auto px-4 space-y-4">
+
+        <% @reviewers.each do |reviewer| %>
+          <article class="bg-white p-6 px-8 shadow-lg" data-aos="fade-up" data-aos-anchor="[data-aos-id-support]">
+            <div class="grid grid-cols-6 divide-x-2">
+              <!-- Content -->
+              <div class="col-start-1 col-span-5">
+                <header>
+                  <h2 class="h4 font-playfair-display mb-2">
+                    <a class="text-slate-800 hover:underline hover:decoration-blue-100" href="#0"><%= reviewer.name %></a>
+                  </h2>
+                </header>
+                <p class="text-slate-500 mb-4"><%= reviewer.review %></p>
+              </div>
+              <div class="flex flex-col justify-between items-center px-4 col-start-6 col-span-1">
+                  <p class="text-xs">3 people have reviewed</p>
+                  <h3 class="h3 text-slate-900 py-4">4.8<span class="inline text-slate-500 text-sm"> / 5</span></h3>
+                  <a href="#" class="btn text-white text-xs bg-blue-600 py-1">Add your review</a>
+              </div>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </section>
+  </main>
+  <!-- Site footer -->
+  <%= render 'shared/footer' %>
+</div>
