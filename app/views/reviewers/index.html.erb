@@ -55,18 +55,19 @@
               <!-- Content -->
               <div class="col-start-1 col-span-5">
                 <header>
-                  <h2 class="h4 font-playfair-display mb-2">
-                    <a class="text-slate-800 hover:underline hover:decoration-blue-100" href="#0"><%= reviewer.name %></a>
-                  </h2>
+                  <h4 class="h4 font-playfair-display mb-2">
+                    <%= reviewer.name %>
+                  </h4>
                 </header>
                 <p class="text-slate-500 mb-4"><%= reviewer.review %></p>
               </div>
               <div class="flex flex-col justify-between items-center px-4 col-start-6 col-span-1">
                   <p class="text-xs">3 people have reviewed</p>
                   <h3 class="h3 text-slate-900 py-4">4.8<span class="inline text-slate-500 text-sm"> / 5</span></h3>
-                  <a href="#" class="btn text-white text-xs bg-blue-600 py-1">Add your review</a>
+                  <button class="btn text-white text-xs bg-blue-600 px-4 py-1">Add your review</button>
               </div>
             </div>
+            <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= params[:category] + '/' + reviewer.id.to_s %>"></a>
           </article>
         <% end %>
       </div>
