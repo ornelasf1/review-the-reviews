@@ -4,10 +4,13 @@ $pageTitleMap = {
 
 class ReviewersController < ApplicationController
   def index
-    @reviewers = Reviewer.where(category: params[:category])
+    @reviewers = Reviewer.where(category: params[:category], platform: params[:platform])
+    @platform = :platform_website
+    @platform = params[:platform] if params[:platform] != nil
+
     case params[:filter]
     when 'rated'
-      @reviewers = @reviewers.sort {|reviewOne, reviewTwo| reviewerFinalRating(reviewOne) <=> reviewerFinalRating(reviewTwo) }
+      @reviewers = @reviewers.sort {|reviewerOne, reviewerTwo| reviewerOne.finalRating <=> reviewerTwo.finalRating }
     when 'unrated'
       @reviewers = @reviewers.filter {|reviewer| reviewer.reviews.count == 0}
     when 'active'
@@ -20,18 +23,5 @@ class ReviewersController < ApplicationController
 
   def show
     @reviewer = Reviewer.find(params[:id])
-  end
-
-  private
-  def reviewerFinalRating reviewer
-    if reviewer.reviews.count == 0
-      return 0
-    end
-    finalTotal = reviewer.reviews.reduce(0) do |aggregate, rating|
-      total = (rating.wellwritten + rating.usability + rating.entertainment + rating.useful) / 4
-      aggregate += total
-    end
-    finalRating = finalTotal / reviewer.reviews.count
-    return finalRating
   end
 end

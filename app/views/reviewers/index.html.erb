@@ -11,29 +11,30 @@
     <section class="relative">
       <div class="flex flex-row items-center max-w-6xl mx-auto px-4 pt-10">
         <h5 class="h5 mr-10">Choose platform:</h5>
-        <div class="grid grid-cols-2 divide-x gap-4">
-          <h4 class="h4 font-semibold text-sky-700 text-center cursor-pointer">Websites</h4>
-          <h4 class="h4 font-light pl-8 text-center cursor-pointer">Streamers</h4>
+        <div x-data="{ chosenPlatform: 'websites' }" class="grid grid-cols-2 divide-x gap-4">
+          <h4 @click="chosenPlatform = 'websites'" :class="{'text-sky-700': chosenPlatform === 'websites', 'font-semibold': chosenPlatform === 'websites', 'font-light': chosenPlatform !== 'websites'}" class="h4 text-center cursor-pointer">Websites</h4>
+          <h4 @click="chosenPlatform = 'streamers'" :class="{'text-sky-700': chosenPlatform === 'streamers', 'font-semibold': chosenPlatform === 'streamers', 'font-light': chosenPlatform !== 'streamers'}" class="h4 pl-8 text-center cursor-pointer">Streamers</h4>
         </div>
       </div>
     </section>
     <section class="relative">
-      <div class="flex flex-row items-center max-w-6xl mx-auto px-4 pt-10">
+      <div class="flex flex-row items-center max-w-6xl mx-auto px-4 pt-10 mb-4">
         <div class="grow grid grid-cols-8">
-          <div class="flex flex-row items-end col-start-1 col-span-7 gap-4">
-            <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-sky-600 border-2 drop-shadow-sm hover:bg-slate-50">
-              Best Rated
-            </button>
-            <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
-              Unrated
-            </button>
-            <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
-              Most Active
-            </button>
-            <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
-              Most Popular
-            </button>
-          </div>
+          <!-- <div x-data class="flex flex-row items-end col-start-1 col-span-7 gap-4">
+            <form action="/reviewers/<%= params[:category] %>?filter=<%= params[:category] %>" method="get">
+              <button type="button" @click="window.history.pushState({filter: 'rated'}, 'Reviewers', '/reviewers/<%= params[:category] %>?filter=rated')" class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50 <%= 'border-sky-600' if @sort_by == 'rated' %>">
+                Best Rated
+              </button>
+              <button type="submit" class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50 <%= 'border-sky-600' if @sort_by == 'unrated' %>">
+                Unrated
+              </button>
+              <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50 <%= 'border-sky-600' if @sort_by == 'active' %>">
+                Most Active
+              </button>
+              <button class="btn py-2 col-span-1 text-sm text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50 <%= 'border-sky-600' if @sort_by == 'popular' %>">
+                Most Popular
+              </button>
+          </div> -->
           <div class="col-start-8 col-span-1">
             <p>Sort by: Rating</p>
             <button class="btn border-sky-600 py-1 px-2 col-span-1 text-xs text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50">
@@ -46,33 +47,16 @@
         </div>
       </div>
     </section>
-    <section class="relative">
-      <div class="max-w-6xl mx-auto px-4 space-y-4">
-
-        <% @reviewers.each do |reviewer| %>
-          <article class="bg-white p-6 px-8 shadow-lg" data-aos="fade-up" data-aos-anchor="[data-aos-id-support]">
-            <div class="grid grid-cols-6 divide-x-2">
-              <!-- Content -->
-              <div class="col-start-1 col-span-5">
-                <header>
-                  <h4 class="h4 font-playfair-display mb-2">
-                    <%= reviewer.name %>
-                  </h4>
-                </header>
-                <p class="text-slate-500 mb-4"><%= reviewer.review %></p>
-              </div>
-              <div class="flex flex-col justify-between items-center px-4 col-start-6 col-span-1">
-                  <p class="text-xs">3 people have reviewed</p>
-                  <h3 class="h3 text-slate-900 py-4">4.8<span class="inline text-slate-500 text-sm"> / 5</span></h3>
-                  <button class="btn text-white text-xs bg-blue-600 px-4 py-1">Add your review</button>
-              </div>
-            </div>
-            <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= params[:category] + '/' + reviewer.id.to_s %>"></a>
-          </article>
-        <% end %>
-      </div>
+    <section div="my_div" class="relative">
+      <%= render 'list', reviewers: @reviewers %>
     </section>
   </main>
   <!-- Site footer -->
   <%= render 'shared/footer' %>
+
+  <script>
+    async function getReviewers(category, filter) {
+      return await fetch(`127.0.0.1/reviewers/${category}?filter=${filter}`);
+    }
+  </script>
 </div>
