@@ -1,0 +1,28 @@
+<div class="bg-white shadow-md p-4" x-data="{ expanded: false }">
+    <p class="text-slate-700 text-sm mb-1"><span class="font-semibold"><%= review.commentor %></span> said</p>
+    <div class="mb-2">
+        <div x-ref="item" class="overflow-hidden" x-transition :style="expanded || $refs.item.scrollHeight &lt; 60 ? 'max-height: ' + $refs.item.scrollHeight + 'px' : 'max-height: ' + $refs.item.scrollHeight / 2 + 'px'">
+        <p class="text-slate-500 text-sm"><%= review.body %></p>
+        </div>
+        <p class="text-lg font-medium text-slate-500 cursor-pointer underline" x-show="$refs.item.scrollHeight > 60" x-text="!expanded ? 'expand' : 'collapse'" @click="expanded = !expanded"></p>
+    </div>
+    <p class="text-slate-700 text-sm mb-1">and gave the <span class="font-semibold">ratings</span></p>
+    <div class="flex flex-col w-3/4">
+        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+        <p class="text-slate-700 text-lg">Usability</p>
+        <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= review.rating.usability %></span> out of 5</p>
+        </div>
+        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+        <p class="text-slate-700 text-lg">Entertainment Value</p>
+        <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= review.rating.entertainment %></span> out of 5</p>
+        </div>
+        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+        <p class="text-slate-700 text-lg">Well Written</p>
+        <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= review.rating.wellwritten %></span> out of 5</p>
+        </div>
+        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+        <p class="text-slate-700 text-lg">Usefulness</p>
+        <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= review.rating.useful %></span> out of 5</p>
+        </div>
+    </div>
+</div>

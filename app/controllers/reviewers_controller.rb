@@ -4,9 +4,11 @@ $pageTitleMap = {
 
 class ReviewersController < ApplicationController
   def index
-    @reviewers = Reviewer.where(category: params[:category], platform: params[:platform])
-    @platform = :platform_website
-    @platform = params[:platform] if params[:platform] != nil
+    @platform = 'website'
+    if params[:platform] != nil
+      @platform = params[:platform]
+    end
+    @reviewers = Reviewer.where(category: params[:category], platform: @platform)
 
     case params[:filter]
     when 'rated'

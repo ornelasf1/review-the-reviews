@@ -7,31 +7,31 @@
       <div class="max-w-6xl mx-auto px-4 pt-20 flex flex-row justify-between">
         <div>
           <h2 class="h2"><%= @reviewer.name %></h2>
-          <footer class="text-sm text-slate-500"><%= @reviewer.platform %></footer>
+          <footer class="text-sm text-slate-500"><%= @reviewer.platform.capitalize %></footer>
         </div>
         <div>
-          <h5 class="h5"><%= $pageTitleMap[params[:category].to_sym] %> Reviewer</h5>
+          <h5 class="h5"><%= $pageTitleMap[@reviewer.category.to_sym] %> Reviewer</h5>
         </div>
       </div>
     </section>
     <section class="relative">
       <div class="max-w-6xl mx-auto my-8 px-4 py-4 bg-white">
-        <form>
+        <%= form_with model: @review do |form| %>
           <label>Leave your Review</label>
           <div class="grid grid-cols-2 py-4">
             <!-- Left side -->
             <div>
               <div class="mt-2">
-                <label class="block text-gray-700 text-sm font-bold" for="name">
+                <label class="block text-gray-700 text-sm font-bold" for="review_name">
                   Name
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="review_name" type="text" placeholder="Name" name="review[commentor]">
               </div>
               <div class="mt-2">
-                <label class="block text-gray-700 text-sm font-bold" for="review">
+                <label class="block text-gray-700 text-sm font-bold" for="review_body">
                   Review
                 </label>
-                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="review" type="text" placeholder="Your thoughts..." rows="4">
+                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="review_body" type="text" placeholder="Your thoughts..." rows="4" name="review[body]">
                 </textarea>
               </div>
             </div>
@@ -87,8 +87,9 @@
               </div>
             </div>
           </div>
-          <button class="btn bg-sky-700 text-white py-2 rounded-md">Submit</button>
-        </form>
+          <!-- <button class="btn bg-sky-700 text-white py-2 rounded-md">Submit</button> -->
+          <%= form.submit %>
+        <% end %>
       </div>
     </section>
 
@@ -96,39 +97,16 @@
     <section class="relative">
       <div class="max-w-6xl mx-auto px-4 py-20 flex flex-col justify-between">
         <h3 class="h3 text-slate-700 mb-4">Reviews</h3>
-        <div class="grid grid-cols-2 gap-4">
-
-          <!-- Review card -->
-          <div class="bg-white shadow-md p-4" x-data="{ expanded: false }">
-            <p class="text-slate-700 text-sm mb-1"><span class="font-semibold">mystery person</span> said</p>
-            <div class="mb-2">
-              <div x-ref="item" class="overflow-hidden" x-transition :style="expanded || $refs.item.scrollHeight &lt; 60 ? 'max-height: ' + $refs.item.scrollHeight + 'px' : 'max-height: ' + $refs.item.scrollHeight / 2 + 'px'">
-                <p class="text-slate-500 text-sm">Occasionally you will make a mistake</p>
-              </div>
-              <p class="text-lg font-medium text-slate-500 cursor-pointer underline" x-show="$refs.item.scrollHeight > 60" x-text="!expanded ? 'expand' : 'collapse'" @click="expanded = !expanded"></p>
-            </div>
-            <p class="text-slate-700 text-sm mb-1">and gave the <span class="font-semibold">ratings</span></p>
-            <div class="flex flex-col w-3/4">
-              <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
-                <p class="text-slate-700 text-lg">Usability</p>
-                <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium">4</span> out of 5</p>
-              </div>
-              <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
-                <p class="text-slate-700 text-lg">Entertainment Value</p>
-                <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium">4</span> out of 5</p>
-              </div>
-              <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
-                <p class="text-slate-700 text-lg">Well Written</p>
-                <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium">4</span> out of 5</p>
-              </div>
-              <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
-                <p class="text-slate-700 text-lg">Usefulness</p>
-                <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium">4</span> out of 5</p>
-              </div>
-            </div>
+        <% if @reviewer.numOfCritics == 0 %>
+          <p class="text-md text-slate-700">No one has left a review yet.</p>
+        <% else %>
+          <div class="grid grid-cols-2 gap-4">
+            <% @reviewer.reviews.each do |review| %>
+            <!-- Review card -->
+              <% render 'review', review: review %>
+            <% end %>
           </div>
-
-        </div>
+        <% end %>
       </div>
     </section>
   </main>

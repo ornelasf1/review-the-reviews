@@ -24,7 +24,7 @@
                 <button class="btn text-white text-xs bg-blue-600 px-4 py-1">Add your review</button>
             </div>
             </div>
-            <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= params[:category] + '/' + reviewer.id.to_s %>"></a>
+            <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= reviewer.id.to_s %>?category=<%= params[:category] %>"></a>
         </article>
     <% end %>
 </div>
