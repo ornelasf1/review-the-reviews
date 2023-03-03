@@ -5,26 +5,28 @@ class Reviewer < ApplicationRecord
         if self.reviews.count == 0
           return 0
         end
-        finalTotal = self.reviews.reduce(0) do |aggregate, review|
-            if review.rating == nil
-                return 0
-            end
+        finalTotal = self.reviews.reject{ |review| review.rating == nil }.reduce(0) do |aggregate, review|
             total = 0
+            numOfRatings = 1
             if review.rating.wellwritten
                 total += review.rating.wellwritten
+                numOfRatings += 1
             end
             if review.rating.usability
                 total += review.rating.usability
+                numOfRatings += 1
             end
             if review.rating.entertainment
                 total += review.rating.entertainment
+                numOfRatings += 1
             end
             if review.rating.useful
                 total += review.rating.useful
+                numOfRatings += 1
             end
 
-            total /= 4
-            
+            total /= numOfRatings
+
             aggregate += total
         end
         finalRating = finalTotal / self.reviews.count
