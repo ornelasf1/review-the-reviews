@@ -12,4 +12,16 @@ module ReviewersHelper
     def categoryName(category)
         $categoryTitleMap[category]
     end
+
+    def categoryMap
+        $categoryTitleMap
+    end
+
+    def category_syms
+        $categoryTitleMap.keys
+    end
+
+    def category_names
+        $categoryTitleMap.values
+    end
 end
