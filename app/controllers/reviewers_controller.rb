@@ -1,6 +1,3 @@
-$pageTitleMap = {
-  :videogames => 'Video Game'
-}
 
 class ReviewersController < ApplicationController
   def index

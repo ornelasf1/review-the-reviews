@@ -5,15 +5,19 @@
   <main class="grow">
     <section class="relative">
       <div class="max-w-6xl mx-auto px-4 pt-20">
-        <h3 class="h3"><%= $pageTitleMap[params[:category].to_sym] %> Reviewers</h3>
+        <h3 class="h3"><%= categoryName(params[:category].to_sym) %> Reviewers</h3>
       </div>
     </section>
     <section class="relative">
       <div class="flex flex-row items-center max-w-6xl mx-auto px-4 pt-10">
         <h5 class="h5 mr-10">Choose platform:</h5>
         <div class="grid grid-cols-2 divide-x gap-4">
-          <a href="reviewers?category=<%= params[:category] %>&platform=website" class="h4 text-center cursor-pointer <%= @platform === 'website' ? 'font-semibold text-sky-700' : 'font-light' %>">Websites</a>
-          <a href="reviewers?category=<%= params[:category] %>&platform=streamer" class="h4 pl-8 text-center cursor-pointer <%= @platform === 'streamer' ? 'font-semibold text-sky-700' : 'font-light' %>">Streamers</a>
+          <%= link_to controller: 'reviewers', category: params[:category], platform: 'website' do %>
+            <h4 class="h4 text-center cursor-pointer <%= @platform === 'website' ? 'font-semibold text-sky-700' : 'font-light' %>">Websites</h4>
+          <% end %>
+          <%= link_to controller: 'reviewers', category: params[:category], platform: 'streamer' do %>
+            <h4 class="h4 pl-8 text-center cursor-pointer <%= @platform === 'streamer' ? 'font-semibold text-sky-700' : 'font-light' %>">Streamers</h4>
+          <% end %>
         </div>
       </div>
     </section>
@@ -37,16 +41,16 @@
           </div> -->
           <div class="col-start-8 col-span-1">
             <p>Sort by: Rating</p>
-            <a href="/reviewers?category=<%= params[:category] %>&platform=<%= params[:platform] %>&sort=asc">
-              <button class="btn py-1 px-2 col-span-1 text-xs text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50 <%= 'border-sky-600' if @sort_direction == :asc %>">
+            <%= link_to controller: 'reviewers', category: params[:category], platform: params[:platform], sort: 'asc' do %>
+              <div class="btn py-1 px-2 col-span-1 text-xs text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50 <%= 'border-sky-600' if @sort_direction == :asc %>">
                 Lowest to Highest
-              </button>
-            </a>
-            <a href="/reviewers?category=<%= params[:category] %>&platform=<%= params[:platform] %>&sort=desc">
-              <button class="btn mt-1 py-1 px-2 col-span-1 text-xs text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50 <%= 'border-sky-600' if @sort_direction == :desc %>">
+              </div>
+            <% end %>
+            <%= link_to controller: 'reviewers', category: params[:category], platform: params[:platform], sort: 'desc' do %>
+              <div class="btn mt-1 py-1 px-2 col-span-1 text-xs text-slate-600 bg-white border-2 drop-shadow-sm hover:bg-slate-50 <%= 'border-sky-600' if @sort_direction == :desc %>">
                 Highest to Lowest
-              </button>
-            </a>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -59,10 +63,4 @@
   </main>
   <!-- Site footer -->
   <%= render 'shared/footer' %>
-
-  <script>
-    async function getReviewers(category, filter) {
-      return await fetch(`127.0.0.1/reviewers/${category}?filter=${filter}`);
-    }
-  </script>
 </div>

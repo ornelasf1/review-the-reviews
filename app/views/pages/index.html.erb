@@ -30,30 +30,13 @@
 
           </div>
           <div class="flex max-w-4xl mx-auto flex-wrap justify-around">
-            <a href="reviewers?category=videogames" class="btn w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
-              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Video Games</p>
-            </a>
-            <a class="btn w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
-              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Tabletop Games</p>
-            </a>
-            <a class="btn w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
-              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Cars & Other Vehicles</p>
-            </a>
-            <a class="btn w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
-              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Computer Software</p>
-            </a>
-            <a class="btn w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
-              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Mobile Apps</p>
-            </a>
-            <a class="btn w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
-              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Computers & Smartphones</p>
-            </a>
-            <a class="btn w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
-              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Restaurants</p>
-            </a>
-            <a class="btn w-48 mb-4 px-4 py-4 bg-white border-slate-200 rounded-md hover:border-r-[1px]">
-              <p class="font-medium pl-4 text-slate-600 text-sm text-left">Foods</p>
-            </a>
+            <% [:videogames, :technology, :tabletop, :software, :vehicles, :apps, :restaurants, :food].each do |category| %>
+              <%= link_to controller: "reviewers", category: category do %>
+                <div class="btn min-w-48 mb-4 bg-white rounded-md shadow hover:shadow-md hover:bg-slate-50">
+                  <p class="font-medium text-slate-600 text-sm text-center"><%= categoryName(category) %></p>
+                </div>
+              <% end %>
+            <% end %>
           </div>
         </section>
 

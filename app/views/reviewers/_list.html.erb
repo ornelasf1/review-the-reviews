@@ -1,6 +1,6 @@
 <div class="max-w-6xl mx-auto px-4 space-y-4">
     <% reviewers.each do |reviewer| %>
-        <article class="bg-white p-6 px-8 shadow-lg" data-aos="fade-up" data-aos-anchor="[data-aos-id-support]">
+        <article class="relative bg-white p-6 px-8 shadow-lg" data-aos="fade-up" data-aos-anchor="[data-aos-id-support]">
             <div class="grid grid-cols-6 divide-x-2">
             <!-- Content -->
             <div class="col-start-1 col-span-5">
@@ -24,7 +24,7 @@
                 <button class="btn text-white text-xs bg-blue-600 px-4 py-1">Add your review</button>
             </div>
             </div>
-            <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= reviewer.id.to_s %>?category=<%= params[:category] %>"></a>
+            <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= reviewer.id.to_s %>"></a>
         </article>
     <% end %>
 </div>
