@@ -1,34 +1,38 @@
 <div class="max-w-6xl mx-auto px-4 space-y-4">
-    <% reviewers.each do |reviewer| %>
-        <article class="relative bg-white p-6 px-8 shadow-lg" data-aos="fade-up" data-aos-anchor="[data-aos-id-support]">
-            <div class="grid grid-cols-6 divide-x-2">
-            <!-- Content -->
-            <div class="col-start-1 col-span-5">
-                <header>
-                <h4 class="h4 font-playfair-display mb-2">
-                    <%= reviewer.name %>
-                </h4>
-                </header>
-                <p class="text-slate-500 mb-4"><%= reviewer.review %></p>
-            </div>
-            <div class="flex flex-col justify-between items-center px-4 col-start-6 col-span-1">
-                <% if reviewer.numOfCritics != 0 %>
-                    <p class="text-xs"><%= people_have_reviewed_format_str reviewer.numOfCritics %></p>
-                    <% if reviewer.finalRating > 0 %>
-                        <h3 class="h3 text-slate-900 py-4"><%= reviewer.finalRating %><span class="inline text-slate-500 text-sm"> / 5</span></h3>
+    <% if reviewers.count != 0 %>
+        <% reviewers.each do |reviewer| %>
+            <article class="relative bg-white p-6 px-8 shadow-lg" data-aos="fade-up" data-aos-anchor="[data-aos-id-support]">
+                <div class="grid grid-cols-6 divide-x-2">
+                <!-- Content -->
+                <div class="col-start-1 col-span-5">
+                    <header>
+                    <h4 class="h4 font-playfair-display mb-2">
+                        <%= reviewer.name %>
+                    </h4>
+                    </header>
+                    <p class="text-slate-500 mb-4"><%= reviewer.review %></p>
+                </div>
+                <div class="flex flex-col justify-between items-center px-4 col-start-6 col-span-1">
+                    <% if reviewer.numOfCritics != 0 %>
+                        <p class="text-xs"><%= people_have_reviewed_format_str reviewer.numOfCritics %></p>
+                        <% if reviewer.finalRating > 0 %>
+                            <h3 class="h3 text-slate-900 py-4"><%= reviewer.finalRating %><span class="inline text-slate-500 text-sm"> / 5</span></h3>
+                        <% else %>
+                            <p class="text-slate-900 py-4 font-medium text-base">No ratings yet</p>
+                        <% end %>
                     <% else %>
-                        <p class="text-slate-900 py-4 font-medium text-base">No ratings yet</p>
+                        <div class="block">
+                            <p class="text-xs">No one has reviewed yet.</p>
+                            <p class="text-xs">Be the <span class="font-bold">first</span> to review</p>
+                        </div>
                     <% end %>
-                <% else %>
-                    <div class="block">
-                        <p class="text-xs">No one has reviewed yet.</p>
-                        <p class="text-xs">Be the <span class="font-bold">first</span> to review</p>
-                    </div>
-                <% end %>
-                <button class="btn text-white text-xs bg-blue-600 px-4 py-1">Add your review</button>
-            </div>
-            </div>
-            <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= reviewer.id.to_s %>"></a>
-        </article>
+                    <button class="btn text-white text-xs bg-blue-600 px-4 py-1">Add your review</button>
+                </div>
+                </div>
+                <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= reviewer.id.to_s %>"></a>
+            </article>
+        <% end %>
+    <% else %>
+        <h3 class="h3 text-slate-700 font-light text-base">Nothing here...yet.</h3>
     <% end %>
 </div>

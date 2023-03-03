@@ -40,7 +40,7 @@ class ReviewersController < ApplicationController
   def create
     @reviewer = Reviewer.create(reviewer_params)
     if @reviewer.save
-      redirect_to reviewers_path
+      redirect_to reviewers_path(category: params[:reviewer][:category])
     else
       render :new, status: :unprocessable_entity
     end
@@ -48,6 +48,6 @@ class ReviewersController < ApplicationController
 
   private
   def reviewer_params
-    params.require(:reviewer).permit(:name, :review, :platform, :website)
+    params.require(:reviewer).permit(:name, :review, :platform, :category)
   end
 end

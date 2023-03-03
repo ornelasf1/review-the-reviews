@@ -1,11 +1,11 @@
 <!-- Page wrapper -->
 <div class="flex flex-col min-h-screen overflow-hidden">
-  <%= render 'shared/header' %>
+  <%= render 'shared/header', theme: 'dark' %>
 
   <main class="grow">
     <section class="relative">
       <div class="max-w-6xl mx-auto px-4 pt-20 mb-4">
-        <h3 class="h3 text-slate-700">Create Reviewer</h3>
+        <h3 class="h3 text-slate-700">Create a Reviewer</h3>
         <%= render 'form', reviewer: @reviewer %>
       </div>
     </section>
