@@ -9,7 +9,22 @@ class Reviewer < ApplicationRecord
             if review.rating == nil
                 return 0
             end
-            total = (review.rating.wellwritten + review.rating.usability + review.rating.entertainment + review.rating.useful) / 4
+            total = 0
+            if review.rating.wellwritten
+                total += review.rating.wellwritten
+            end
+            if review.rating.usability
+                total += review.rating.usability
+            end
+            if review.rating.entertainment
+                total += review.rating.entertainment
+            end
+            if review.rating.useful
+                total += review.rating.useful
+            end
+
+            total /= 4
+            
             aggregate += total
         end
         finalRating = finalTotal / self.reviews.count
