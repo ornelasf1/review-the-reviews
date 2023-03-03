@@ -5,21 +5,26 @@ $pageTitleMap = {
 class ReviewersController < ApplicationController
   def index
     @platform = 'website'
+    @sort_direction = :asc
+
     if params[:platform] != nil
       @platform = params[:platform]
     end
-    @reviewers = Reviewer.where(category: params[:category], platform: @platform)
+    if params[:sort] != nil
+      @sort_direction = params[:sort].to_sym
+    end
 
-    case params[:filter]
-    when 'rated'
-      @reviewers = @reviewers.sort {|reviewerOne, reviewerTwo| reviewerOne.finalRating <=> reviewerTwo.finalRating }
-    when 'unrated'
-      @reviewers = @reviewers.filter {|reviewer| reviewer.reviews.count == 0}
-    when 'active'
-      @reviewers = @reviewers.filter {|reviewer| reviewer.reviews.count == 0}
-    when 'popular'
-      @reviewers = @reviewers.sort {|reviewerOne, reviewerTwo| reviewerOne.reviews.count <=> reviewerTwo.reviews.count }
+    @reviewers = Reviewer.where(category: params[:category], platform: @platform)
+    if @sort_direction == :asc
+      @reviewers = @reviewers.sort { |reviewerOne, reviewerTwo| reviewerOne.finalRating <=> reviewerTwo.finalRating }
     else
+      @reviewers = @reviewers.sort { |reviewerOne, reviewerTwo| reviewerTwo.finalRating <=> reviewerOne.finalRating }
+    end
+
+    if turbo_frame_request?
+      respond_to do |format|
+        format.html { render partial: 'list', locals: { reviewers: @reviewers }}
+      end
     end
   end
 
