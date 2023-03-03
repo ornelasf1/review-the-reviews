@@ -26,7 +26,7 @@ module ReviewersHelper
     end
 
     def people_have_reviewed_format_str count
-        if count >= 1
+        if count == 1
             "#{count} person has reviewed"
         else
             "#{count} people have reviewed"
