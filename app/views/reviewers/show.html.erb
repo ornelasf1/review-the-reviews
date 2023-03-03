@@ -46,15 +46,15 @@
                 </div>
                 <div class="flex flex-row items-center justify-between">
                   <label for="entertainment-rate" class="text-md font-normal text-gray-700">Entertainment Value</label>
-                  <%= form.number_field :entertainment, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                  <%= form.number_field 'rating[entertainment]', in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
                 </div>
                 <div class="flex flex-row items-center justify-between">
                   <label for="wellwritten-rate" class="text-md font-normal text-gray-700">Well Written</label>
-                  <%= form.number_field :wellwritten, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                  <%= form.number_field 'rating[wellwritten]', in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
                 </div>
                 <div class="flex flex-row items-center justify-between">
                   <label for="usefulness-rate" class="text-md font-normal text-gray-700">Usefulness</label>
-                  <%= form.number_field :useful, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                  <%= form.number_field 'rating[useful]', in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
                 </div>
               </div>
             </div>

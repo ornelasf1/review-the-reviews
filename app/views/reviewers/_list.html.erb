@@ -13,8 +13,12 @@
             </div>
             <div class="flex flex-col justify-between items-center px-4 col-start-6 col-span-1">
                 <% if reviewer.numOfCritics != 0 %>
-                    <p class="text-xs"><%= reviewer.numOfCritics %> people have reviewed</p>
-                    <h3 class="h3 text-slate-900 py-4"><%= reviewer.finalRating %><span class="inline text-slate-500 text-sm"> / 5</span></h3>
+                    <p class="text-xs"><%= people_have_reviewed_format_str reviewer.numOfCritics %></p>
+                    <% if reviewer.finalRating > 0 %>
+                        <h3 class="h3 text-slate-900 py-4"><%= reviewer.finalRating %><span class="inline text-slate-500 text-sm"> / 5</span></h3>
+                    <% else %>
+                        <p class="text-slate-900 py-4 font-medium text-base">No ratings yet</p>
+                    <% end %>
                 <% else %>
                     <div class="block">
                         <p class="text-xs">No one has reviewed yet.</p>

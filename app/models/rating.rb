@@ -4,8 +4,8 @@ class Rating < ApplicationRecord
   validate :any_rating_present?
 
   def any_rating_present?
-    if %w(usability useful entertainment wellwritten).all?{|attr| self[attr].blank?}
-      errors.add :base, "Error message"
+    if wellwritten.blank? and usability.blank? and useful.blank? and entertainment.blank?
+      errors.add :base, "One of these ratings have to be set"
     end
   end
 end
