@@ -4,6 +4,10 @@ class ReviewersController < ApplicationController
     @platform = 'website'
     @sort_direction = :asc
 
+    if params[:category].blank?
+      redirect_to root_path, status: :see_other
+    end
+
     if params[:platform] != nil
       @platform = params[:platform]
     end
@@ -27,5 +31,23 @@ class ReviewersController < ApplicationController
 
   def show
     @reviewer = Reviewer.find(params[:id])
+  end
+
+  def new
+    @reviewer = Reviewer.new
+  end
+
+  def create
+    @reviewer = Reviewer.create(reviewer_params)
+    if @reviewer.save
+      redirect_to reviewers_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def reviewer_params
+    params.require(:reviewer).permit(:name, :review, :platform, :website)
   end
 end

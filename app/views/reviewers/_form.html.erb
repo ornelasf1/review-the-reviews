@@ -1,0 +1,33 @@
+<%= form_with model: reviewer, class: 'space-y-2' do |form| %>
+    <div>
+        <%= form.label :name, class: 'text-md font-medium text-slate-700' %><br>
+        <%= form.text_field :name, maxlength: "100", class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <% reviewer.errors.full_messages_for(:name).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+    <div>
+        <%= form.label 'Description', class: 'text-md font-medium text-slate-700' %><br>
+        <%= form.text_area :review, maxlength: "1000", size: "70x3", class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <% reviewer.errors.full_messages_for(:review).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+    <div>
+        <%= form.label :platform, class: 'text-md font-medium text-slate-700' %><br>
+        <%= form.select :platform, platformMap.map {|platformSym, platformName| [platformName, platformSym.to_s] }, { include_blank: true }, class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <% reviewer.errors.full_messages_for(:platform).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+    <div>
+        <%= form.label :category, class: 'text-md font-medium text-slate-700' %><br>
+        <%= form.select :category, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, { include_blank: true }, class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <% reviewer.errors.full_messages_for(:category).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+    <div class="flex flex-row justify-center">
+        <%= form.submit 'Submit', class: 'btn bg-sky-700 text-white py-2 rounded-md px-10 cursor-pointer' %>
+    </div>
+<% end %>

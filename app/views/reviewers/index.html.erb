@@ -9,16 +9,21 @@
       </div>
     </section>
     <section class="relative">
-      <div class="flex flex-row items-center max-w-6xl mx-auto px-4 pt-10">
-        <h5 class="h5 mr-10">Choose platform:</h5>
-        <div class="grid grid-cols-2 divide-x gap-4">
-          <%= link_to controller: 'reviewers', category: params[:category], platform: 'website' do %>
-            <h4 class="h4 text-center cursor-pointer <%= @platform === 'website' ? 'font-semibold text-sky-700' : 'font-light' %>">Websites</h4>
-          <% end %>
-          <%= link_to controller: 'reviewers', category: params[:category], platform: 'streamer' do %>
-            <h4 class="h4 pl-8 text-center cursor-pointer <%= @platform === 'streamer' ? 'font-semibold text-sky-700' : 'font-light' %>">Streamers</h4>
-          <% end %>
+      <div class="flex flex-row justify-between max-w-6xl mx-auto px-4 pt-10">
+        <div class="flex flex-row items-center">
+          <h5 class="h5 mr-10">Choose platform:</h5>
+          <div class="grid grid-cols-2 divide-x gap-4">
+            <%= link_to controller: 'reviewers', category: params[:category], platform: 'website' do %>
+              <h4 class="h4 text-center cursor-pointer <%= @platform === 'website' ? 'font-semibold text-sky-700' : 'font-light' %>">Websites</h4>
+            <% end %>
+            <%= link_to controller: 'reviewers', category: params[:category], platform: 'streamer' do %>
+              <h4 class="h4 pl-8 text-center cursor-pointer <%= @platform === 'streamer' ? 'font-semibold text-sky-700' : 'font-light' %>">Streamers</h4>
+            <% end %>
+          </div>
         </div>
+        <%= link_to new_reviewer_path do %>
+          <button class="btn bg-sky-700 text-white">Submit Reviewer</button>
+        <% end %>
       </div>
     </section>
     <section class="relative">

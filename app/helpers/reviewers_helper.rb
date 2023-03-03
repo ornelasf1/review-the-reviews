@@ -9,6 +9,10 @@ module ReviewersHelper
         :restaurants => 'Restaurant',
         :food => 'Food'
     }
+    $platformTitleMap = {
+        :streamer => 'Streamer',
+        :website => 'Website'
+    }
     def categoryName(category)
         $categoryTitleMap[category]
     end
@@ -23,6 +27,14 @@ module ReviewersHelper
 
     def category_names
         $categoryTitleMap.values
+    end
+
+    def platformMap
+        $platformTitleMap
+    end
+
+    def platform_syms
+        $platformTitleMap.keys
     end
 
     def people_have_reviewed_format_str count
