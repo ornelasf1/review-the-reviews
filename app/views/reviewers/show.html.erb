@@ -13,6 +13,9 @@
           <h4 class="h4 text-slate-700"><%= categoryName @reviewer.category.to_sym %> Reviewer</h4>
         </div>
       </div>
+      <div class="max-w-6xl mx-auto px-4">
+        <p class="text-slate-700 text-md"><%= @reviewer.review %></p>
+      </div>
     </section>
     <section class="relative">
       <div class="max-w-6xl mx-auto my-8 px-4 py-4 bg-white">
