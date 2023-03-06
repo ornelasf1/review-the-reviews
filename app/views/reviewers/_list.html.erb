@@ -11,7 +11,14 @@
                         </h4>
                         </header>
                         <p class="text-slate-500 mb-4"><%= reviewer.review %></p>
-                        <footer><%= reviewer.platform.capitalize %> - <%= categoryName reviewer.category.to_sym %> Reviewer</footer>
+                        <div class="flex flex-row justify-between mr-10">
+                            <footer><%= reviewer.platform.capitalize %> - <%= categoryName reviewer.category.to_sym %> Reviewer - <%= link_to "#{reviewer.hostname}", reviewer.hostname, class: 'z-10 text-blue-500 hover:underline' %></footer>
+                            <% unless @review_links.blank? %>
+                                <%= link_to "#{params[:query]} review", @review_links[reviewer.hostname], class: 'z-10 text-blue-500 hover:underline' %>
+                            <% else %>
+                                <footer class="hidden"></footer>
+                            <% end %>
+                        </div>
                     </div>
                     <div class="flex flex-col justify-between items-center px-4 col-start-6 col-span-1">
                         <% if reviewer.numOfCritics != 0 %>
@@ -30,7 +37,7 @@
                         <button class="btn text-white text-xs bg-blue-600 px-4 py-1">Add your review</button>
                     </div>
                 </div>
-                <a class="absolute w-full h-full top-0 left-0 z-10" href="/reviewers/<%= reviewer.id.to_s %>"></a>
+                <a class="absolute w-full h-full top-0 left-0" href="/reviewers/<%= reviewer.id.to_s %>"></a>
             </article>
         <% end %>
     <% else %>

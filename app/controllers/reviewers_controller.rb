@@ -62,6 +62,6 @@ class ReviewersController < ApplicationController
 
   private
   def reviewer_params
-    params.require(:reviewer).permit(:name, :review, :platform, :category)
+    params.require(:reviewer).permit(:name, :review, :hostname, :platform, :category)
   end
 end

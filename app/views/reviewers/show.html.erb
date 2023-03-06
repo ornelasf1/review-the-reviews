@@ -15,6 +15,7 @@
         <div>
           <h2 class="h2"><%= @reviewer.name %></h2>
           <footer class="text-xl text-slate-500"><%= @reviewer.platform.capitalize %></footer>
+          <footer class="text-xl text-slate-500"><%= @reviewer.hostname %></footer>
         </div>
         <div>
           <h4 class="h4 text-slate-700"><%= categoryName @reviewer.category.to_sym %> Reviewer</h4>

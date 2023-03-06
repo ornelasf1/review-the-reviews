@@ -19,7 +19,7 @@ module SearchApi
     # json['items'].each do |obj|
     #     puts obj['link']
     # end
-    API_KEY=''
+    API_KEY='AIzaSyDEB47WaNPX9CUha57jp8CpupSkhPVguRk'
 
     def search_reviews websites, query
         sites_query = websites.map{ |site| "site:#{site}"}.join ' OR '

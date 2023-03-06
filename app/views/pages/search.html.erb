@@ -15,10 +15,9 @@
                     <div class="max-w-3xl mx-auto text-center">
                         <h1 class="h1 font-playfair-display text-slate-100 mb-4">Review the Reviewers</h1>
                         <p class="text-xl text-slate-400 mb-8">Look up a product or a reviewer.</p>
-                        <!-- Subscribe form -->
                         <%= form_with url: "/search", method: "get", class: 'space-y-2' do |form| %>
                             <div class="flex flex-row justify-center mx-auto max-w-lg space-x-2">
-                                <%= form.select :category, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, { include_blank: true }, class: "border-1 text-white border-slate-700 bg-slate-800 rounded-md appearance-none text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+                                <%= form.select :category, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, { include_blank: true }, selected: params[:category], class: "border-1 text-white border-slate-700 bg-slate-800 rounded-md appearance-none text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
                                 <%= form.text_field :query, class: "form-input w-full rounded-md bg-slate-800 border border-slate-700 focus:border-slate-600 text-white placeholder-slate-500 mb-0 mr-2", placeholder: "Product or reviewer" %>
                                 <%= form.submit 'Search', class: 'btn text-white bg-blue-600 hover:bg-blue-700' %>
                             </div>
@@ -27,26 +26,10 @@
             </div>
         </section>
 
-        <section class="relative pt-10">
-          <div class="max-w-6xl mx-auto my-4 pl-16">
-            <h3 class="text-lg font-semibold text-slate-700">Reviewers by Category</h3>
-
-          </div>
-          <div class="flex max-w-4xl mx-auto flex-wrap justify-around">
-            <% [:videogames, :technology, :tabletop, :software, :vehicles, :apps, :restaurants, :food].each do |category| %>
-              <%= link_to controller: "reviewers", category: category do %>
-                <div class="btn min-w-48 mb-4 bg-white rounded-md shadow hover:shadow-md hover:bg-slate-50">
-                  <p class="font-medium text-slate-600 text-sm text-center"><%= categoryName(category) %></p>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        </section>
-
         <section class="relative">
           <div class="max-w-6xl mx-auto px-4">
-            <h4 class="h4 text-slate-700 my-4">Recent reviewers</h4>
-            <%= render 'reviewers/list', reviewers: @recent_reviewers %>
+            <p class="text-lg text-slate-700 my-4">Publishers that have reviewed <span class="font-semibold"><%= params[:query] %></span></p>
+            <%= render 'reviewers/list', reviewers: @reviewers %>
           </div>
         </section>
 

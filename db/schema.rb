@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_01_185008) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_06_211021) do
   create_table "ratings", force: :cascade do |t|
     t.decimal "usability"
     t.decimal "wellwritten"
@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_01_185008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category"
+    t.string "hostname"
+    t.string "channel"
   end
 
   create_table "reviews", force: :cascade do |t|

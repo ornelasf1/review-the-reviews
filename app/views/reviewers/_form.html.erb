@@ -7,6 +7,13 @@
         <% end %>
     </div>
     <div>
+        <%= form.label :hostname, class: 'text-md font-medium text-slate-700' %><br>
+        <%= form.text_field :hostname, maxlength: "100", class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <% reviewer.errors.full_messages_for(:hostname).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+    <div>
         <%= form.label 'Description', class: 'text-md font-medium text-slate-700' %><br>
         <%= form.text_area :review, maxlength: "1000", size: "70x3", class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
         <% reviewer.errors.full_messages_for(:review).each do |message| %>
