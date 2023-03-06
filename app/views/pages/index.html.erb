@@ -2,29 +2,32 @@
 <div class="flex flex-col min-h-screen overflow-hidden">
 
     <%= render 'shared/header', theme: 'dark' %>
-    
-    <!-- Page content -->
-    <main class="grow">
 
         <!-- Hero -->
         <section class="relative">
 
             <!-- Dark background -->
-            <div class="absolute inset-0 bg-slate-900 pointer-events-none -z-10 [clip-path:polygon(0_0,_5760px_0,_5760px_calc(100%_-_352px),_0_100%)]" aria-hidden="true"></div>
+            <div class="absolute inset-0 bg-slate-900 pointer-events-none -z-10" aria-hidden="true"></div>
 
-            <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
-                <div class="pt-32 pb-20 md:pt-40 md:pb-44">
+            <div class="relative max-w-6xl mx-auto px-4 pb-10 pt-20">
 
-                    <!-- Hero content -->
-                    <div class="flex flex-col items-center">
-
-                        <h1 class="h1 font-pacifico text-slate-100">Review The Reviewers</h1>
+                    <!-- Section header -->
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h1 class="h1 font-playfair-display text-slate-100 mb-4">Review the Reviewers</h1>
+                        <p class="text-xl text-slate-400 mb-8">Look up a product or a reviewer.</p>
+                        <!-- Subscribe form -->
+                        <%= form_with model: @reviewer, class: 'space-y-2' do |form| %>
+                            <div class="flex flex-row justify-center mx-auto max-w-lg space-x-2">
+                                <%= form.select :category, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, { include_blank: true }, class: "border-1 text-white border-slate-700 bg-slate-800 rounded-md appearance-none text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+                                <input type="email" class="form-input w-full rounded-md bg-slate-800 border border-slate-700 focus:border-slate-600 text-white placeholder-slate-500 mb-0 mr-2" placeholder="Product or reviewer" aria-label="Product or reviewer" />
+                                <button class="btn text-white bg-blue-600 hover:bg-blue-700" href="#0">Search</button>
+                            </div>
+                        <% end %>
                     </div>
-
-                </div>
             </div>
         </section>
-        <section class="relative">
+
+        <section class="relative pt-10">
           <div class="max-w-6xl mx-auto my-4 pl-16">
             <h3 class="text-lg font-semibold text-slate-700">Reviewers by Category</h3>
 

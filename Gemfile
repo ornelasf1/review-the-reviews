@@ -72,5 +72,3 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.0"
-
-gem 'google_search_results', '~> 2.1.0'
