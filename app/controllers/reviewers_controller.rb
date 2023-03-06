@@ -32,6 +32,20 @@ class ReviewersController < ApplicationController
   def show
     @reviewer = Reviewer.find(params[:id])
   end
+  
+  def edit
+    @reviewer = Reviewer.find(params[:id])
+  end
+  
+  def update
+    @reviewer = Reviewer.find(params[:id])
+
+    if @reviewer.update(reviewer_params)
+      redirect_to @reviewer
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def new
     @reviewer = Reviewer.new

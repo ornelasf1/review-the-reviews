@@ -4,7 +4,14 @@
 
   <main class="grow">
     <section class="relative">
-      <div class="max-w-6xl mx-auto px-4 pt-20 flex flex-row justify-between">
+      <div class="max-w-6xl mx-auto px-4 pt-20 flex flex-row flex-end">
+        <%= link_to edit_reviewer_path(@reviewer) do %>
+            <button class="text-slate-800 font-medium underline">Edit</button>
+        <% end %>
+      </div>
+    </section>
+    <section class="relative">
+      <div class="max-w-6xl mx-auto px-4 flex flex-row justify-between">
         <div>
           <h2 class="h2"><%= @reviewer.name %></h2>
           <footer class="text-xl text-slate-500"><%= @reviewer.platform.capitalize %></footer>
