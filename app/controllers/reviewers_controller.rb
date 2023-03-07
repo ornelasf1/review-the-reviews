@@ -40,7 +40,6 @@ class ReviewersController < ApplicationController
   def update
     @reviewer = Reviewer.find(params[:id])
     update_category_paths_json @reviewer, :edit
-
     if @reviewer.update(reviewer_params)
       redirect_to @reviewer
     else
@@ -69,7 +68,7 @@ class ReviewersController < ApplicationController
   end
 
   def update_category_paths_json reviewer, render_sym
-    catPathUrl = params[:reviewer][:categoryPath]
+    catPathUrl = params[:categoryPath]
     unless catPathUrl.blank?
       catPathUrl = catPathUrl.strip
       unless catPathUrl =~ /\A(?:\/[0-9a-zA-Z\-_]*)+\z/

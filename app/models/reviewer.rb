@@ -2,7 +2,13 @@ class Reviewer < ApplicationRecord
     before_save do 
         self.name = name.strip
         self.review = review.strip
-        self.hostname = URI.parse(hostname.strip).hostname if hostname.blank?
+        unless hostname.blank?
+            if hostname =~ /\Ahttps?:\/\//
+                self.hostname = URI.parse(hostname.strip).hostname
+            else
+                self.hostname = URI.parse("http://" + hostname.strip).hostname
+            end
+        end
     end
     has_many :reviews
 
