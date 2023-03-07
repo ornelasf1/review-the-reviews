@@ -21,6 +21,15 @@ module SearchApi
     # end
     API_KEY='AIzaSyDEB47WaNPX9CUha57jp8CpupSkhPVguRk'
 
+    # Parameters
+    # websites, an array of urls. e.g. ['www.ign.com/games', 'www.gamespot.com']
+    # query, a string of item to look for
+    #
+    # Returns a hash map of the following form or an empty hash if no results were found
+    # {
+    #     "www.ign.com/games" => ["www.review1.com", "www.review2.com"],
+    #     "www.gamespot.com" => ["www.review1.com", "www.review2.com", "www.review3.com"]
+    # }
     def search_reviews websites, query
         sites_query = websites.map{ |site| "site:#{site}"}.join ' OR '
         query="#{sites_query.blank? ? '' : sites_query + ' '}#{query} reviews"

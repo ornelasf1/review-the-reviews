@@ -17,8 +17,8 @@
                         <p class="text-xl text-slate-400 mb-8">Look up a product or a reviewer.</p>
                         <%= form_with url: "/search", method: "get", class: 'space-y-2' do |form| %>
                             <div class="flex flex-row justify-center mx-auto max-w-lg space-x-2">
-                                <%= form.select :category, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, { include_blank: true }, selected: params[:category], class: "border-1 text-white border-slate-700 bg-slate-800 rounded-md appearance-none text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-                                <%= form.text_field :query, class: "form-input w-full rounded-md bg-slate-800 border border-slate-700 focus:border-slate-600 text-white placeholder-slate-500 mb-0 mr-2", placeholder: "Product or reviewer" %>
+                                <%= form.select :category, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, {}, {selected: params[:category], class: "border-1 text-white border-slate-700 bg-slate-800 rounded-md appearance-none text-gray-700 leading-tight focus:outline-none focus:shadow-outline"} %>
+                                <%= form.text_field :query, class: "form-input w-full rounded-md bg-slate-800 border border-slate-700 focus:border-slate-600 text-white placeholder-slate-500 mb-0 mr-2", placeholder: "Product or reviewer", value: params[:query] %>
                                 <%= form.submit 'Search', class: 'btn text-white bg-blue-600 hover:bg-blue-700' %>
                             </div>
                         <% end %>

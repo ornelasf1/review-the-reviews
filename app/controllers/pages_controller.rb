@@ -10,8 +10,14 @@ class PagesController < ApplicationController
   end
 
   def get_reviewers_for_product query
-    reviewers = Reviewer.where(category: params[:category]).select(:hostname)
-    hostnames = reviewers.reject { |reviewer| reviewer.hostname.blank? }.map { |reviewer| reviewer.hostname }
+    reviewers = Reviewer.where(category: params[:category]).select(:hostname, :categoryPaths, :category)
+    hostnames = reviewers.reject { |reviewer| reviewer.hostname.blank? }.map do |reviewer|
+      if reviewer.categoryPaths.has_key? reviewer.category
+        next reviewer.hostname + reviewer.categoryPaths[reviewer.category]
+      else
+        next reviewer.hostname
+      end
+    end
     hostname_to_reviews_map = search_reviews hostnames, query
     
     # Transform search api to only get the first review on a product

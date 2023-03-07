@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_06_211021) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_002258) do
   create_table "ratings", force: :cascade do |t|
     t.decimal "usability"
     t.decimal "wellwritten"
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_211021) do
     t.string "category"
     t.string "hostname"
     t.string "channel"
+    t.json "categoryPaths", default: {}
   end
 
   create_table "reviews", force: :cascade do |t|

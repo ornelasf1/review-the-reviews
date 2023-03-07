@@ -39,6 +39,7 @@ class ReviewersController < ApplicationController
   
   def update
     @reviewer = Reviewer.find(params[:id])
+    update_category_paths_json @reviewer, :edit
 
     if @reviewer.update(reviewer_params)
       redirect_to @reviewer
@@ -53,6 +54,8 @@ class ReviewersController < ApplicationController
 
   def create
     @reviewer = Reviewer.create(reviewer_params)
+    update_category_paths_json @reviewer, :new
+
     if @reviewer.save
       redirect_to reviewers_path(category: params[:reviewer][:category])
     else
@@ -63,5 +66,17 @@ class ReviewersController < ApplicationController
   private
   def reviewer_params
     params.require(:reviewer).permit(:name, :review, :hostname, :platform, :category)
+  end
+
+  def update_category_paths_json reviewer, render_sym
+    catPathUrl = params[:reviewer][:categoryPath]
+    unless catPathUrl.blank?
+      catPathUrl = catPathUrl.strip
+      unless catPathUrl =~ /\A(?:\/[0-9a-zA-Z\-_]*)+\z/
+        # TODO: Add error message to categoryPath form
+        return render render_sym, status: :unprocessable_entity
+      end
+      reviewer.categoryPaths[params[:reviewer][:category]] = catPathUrl
+    end
   end
 end
