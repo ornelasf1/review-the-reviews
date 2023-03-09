@@ -44,4 +44,13 @@ module ReviewersHelper
             "#{count} people have reviewed"
         end
     end
+
+    def link_to_add_category(name, form, association)
+        new_object = form.object.send(association).klass.new
+        id = new_object.object_id
+        categories = form.fields_for(association, new_object, child_index: id) do |builder|
+          render("category", categories_form: builder, showDeleteBtn: true)
+        end
+        link_to(name, '#', :onclick => 'addCategoryFieldset(event)', class: "add_categories", data: {id: id, categories: categories.gsub("\n", "")})
+      end
 end

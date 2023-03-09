@@ -17,11 +17,11 @@
           <footer class="text-xl text-slate-500"><%= @reviewer.platform.capitalize %></footer>
           <footer class="text-xl text-slate-500"><%= @reviewer.hostname %></footer>
         </div>
-        <% @reviewer.categories.each do |category| %>
-          <div>
+        <div class="flex flex-col items-end">
+          <% @reviewer.categories.each do |category| %>
             <p class="text-slate-700 font-md"><%= categoryName category.name.to_sym %> Reviewer</p>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
       <div class="max-w-6xl mx-auto px-4">
         <p class="text-slate-700 text-md"><%= @reviewer.review %></p>

@@ -12,12 +12,12 @@ class Reviewer < ApplicationRecord
     end
     has_many :reviews
     has_many :categories
+    accepts_nested_attributes_for :categories, allow_destroy: true
 
     validates :name, presence: true, length: {minimum:3, maximum: 100}
     validates :review, presence: true, length: {minimum:20, maximum: 1000}
     validates :hostname, presence: true, format: { with: /\A(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)\z/, message: "invalid" }
     validates :platform, presence: true, inclusion: { in: $platformTitleMap.keys.map { |sym| sym.to_s } }
-    # validates :category, presence: true, inclusion: { in: $categoryTitleMap.keys.map { |sym| sym.to_s } }
 
     def finalRating
         require 'json'
