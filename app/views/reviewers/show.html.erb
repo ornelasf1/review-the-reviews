@@ -17,6 +17,9 @@
           <h2 class="h2"><%= @reviewer.name %></h2>
           <footer class="text-xl text-slate-500"><%= @reviewer.platform.capitalize %></footer>
           <footer class="text-xl text-slate-500"><%= @reviewer.hostname %></footer>
+          <% @reviewer.categories.each do |category| %>
+            <p class="text-slate-700 font-sm font-medium"><%= categoryName category.name.to_sym %> <span class="font-normal"><%= @reviewer.hostname + (category.path.blank? ? '' : category.path) %></span></p>
+          <% end %>
         </div>
         <div class="flex flex-col items-end">
           <% @reviewer.categories.each do |category| %>
@@ -24,7 +27,7 @@
           <% end %>
         </div>
       </div>
-      <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-6xl mx-auto px-4 mt-4">
         <p class="text-slate-700 text-md"><%= @reviewer.review %></p>
       </div>
     </section>

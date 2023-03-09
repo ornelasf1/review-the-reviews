@@ -33,7 +33,7 @@
             <%= form.label :categories, "Category URL Path", class: 'text-md font-medium text-slate-700 col-span-1 ml-2' %>
         </div>
         <%= form.fields_for :categories do |categories_form| %>
-            <%= render 'category', categories_form: categories_form, showDeleteBtn: false %>
+            <%= render 'category', categories_form: categories_form, showDeleteBtn: true %>
         <% end %>
         <%= link_to_add_category "Add Category", form, :categories %>
     </div>
@@ -51,6 +51,7 @@
     }
     function deleteCategoryFieldset(e, selfElement) {
         e.preventDefault();
+        selfElement.parentNode.nextElementSibling.remove();
         selfElement.parentNode.remove();
     }
     </script>

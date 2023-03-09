@@ -6,7 +6,8 @@ class PagesController < ApplicationController
 
   def search
     @review_links = get_reviewers_for_product params[:query]
-    @reviewers = Reviewer.where(hostname: @review_links.keys, category: params[:category])
+    puts @review_links
+    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).where(hostname: @review_links.keys)
   end
 
   def get_reviewers_for_product query

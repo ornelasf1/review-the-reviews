@@ -1,6 +1,7 @@
 module ReviewersHelper
     $categoryTitleMap = {
         :videogames => 'Video Game',
+        :movies => 'Movies',
         :technology => 'Technology',
         :tabletop => 'Tabletop Games',
         :software => 'Computer Software',
