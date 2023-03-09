@@ -10,8 +10,8 @@ class Reviewer < ApplicationRecord
             end
         end
     end
-    has_many :reviews
-    has_many :categories
+    has_many :reviews, dependent: :destroy
+    has_many :categories, dependent: :destroy
     accepts_nested_attributes_for :categories, allow_destroy: true
 
     validates :name, presence: true, length: {minimum:3, maximum: 100}
