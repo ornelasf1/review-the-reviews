@@ -17,9 +17,11 @@
           <footer class="text-xl text-slate-500"><%= @reviewer.platform.capitalize %></footer>
           <footer class="text-xl text-slate-500"><%= @reviewer.hostname %></footer>
         </div>
-        <div>
-          <h4 class="h4 text-slate-700"><%= categoryName @reviewer.category.to_sym %> Reviewer</h4>
-        </div>
+        <% @reviewer.categories.each do |category| %>
+          <div>
+            <p class="text-slate-700 font-md"><%= categoryName category.name.to_sym %> Reviewer</p>
+          </div>
+        <% end %>
       </div>
       <div class="max-w-6xl mx-auto px-4">
         <p class="text-slate-700 text-md"><%= @reviewer.review %></p>

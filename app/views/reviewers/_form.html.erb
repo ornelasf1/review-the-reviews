@@ -27,23 +27,35 @@
             <div><%= message %></div>
         <% end %>
     </div>
-    <div class="flex flex-row space-x-8">
-        <div>
-            <%= form.label :category, class: 'text-md font-medium text-slate-700' %><br>
-            <%= form.select :category, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, { include_blank: true }, class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-            <% reviewer.errors.full_messages_for(:category).each do |message| %>
-                <div><%= message %></div>
-            <% end %>
+    <div x-data>
+        <div class="grid grid-cols-5 mb-2">
+            <%= form.label :categories, class: 'text-md font-medium text-slate-700 col-span-1' %>
+            <%= form.label :categories, "Category URL Path", class: 'text-md font-medium text-slate-700 col-span-1 ml-2' %>
         </div>
-        <div>
-            <%= form.label :categoryPath, "Category URL Path", class: 'text-md font-medium text-slate-700' %><br>
-            <input id="categoryPath" name="categoryPath" value="<%= reviewer.getCategoryPath %>" maxlength="100" type="text" class="border-1 border-slate-200 bg-slate-50 rounded-md appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-56" />
-            <% reviewer.errors.full_messages_for(:categoryPath).each do |message| %>
-                <div><%= message %></div>
-            <% end %>
+        <div id="category-form-1">
+            <%= render 'category', form: form, reviewer: reviewer %>
         </div>
+        <button class="btn px-2 py-1" @click.prevent="addCategoryForm()">Add Category</button>
     </div>
     <div class="flex flex-row justify-center">
         <%= form.submit 'Submit', class: 'btn bg-sky-700 text-white py-2 rounded-md px-10 cursor-pointer' %>
     </div>
+    <script>
+    function addCategoryForm() {
+        let allcats = document.querySelectorAll('[id^="category-form"]')
+        let lastCat = allcats[allcats.length -1];
+        let newCat = lastCat.cloneNode(true);
+        let newCatSelectEl = newCat.querySelector('select');
+        let newCatInputEl = newCat.querySelector('input');
+        let suffix = newCat.id.substr(newCat.id.length - 1);
+        let newSuffix = parseInt(suffix) + 1;
+        newCat.setAttribute('id', 'category-form-' + newSuffix);
+        newCatSelectEl.setAttribute('id', 'reviewer_category_name' + newSuffix);
+        newCatSelectEl.setAttribute('name', 'categories[category' + newSuffix + '][name]');
+        newCatInputEl.setAttribute('id', 'reviewer_category_path' + newSuffix);
+        newCatInputEl.setAttribute('name', 'categories[category' + newSuffix + '][path]');
+        newCat.classList.remove('hidden');
+        lastCat.parentNode.insertBefore(newCat, lastCat.nextSibling);
+    }
+    </script>
 <% end %>

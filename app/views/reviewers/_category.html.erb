@@ -1,0 +1,14 @@
+<div class="grid grid-cols-5 my-2">
+    <div class="col-span-1">
+        <%= form.select :categories, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, {}, {id: "reviewer_category_name_1", name: "categories[category1][name]", placeholder: 'Select Category', class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"} %>
+        <% reviewer.errors.full_messages_for(:categories).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+    <div class="col-span-1 ml-2">
+        <input id="reviewer_category_path_1" name="categories[category1][path]" value="<%= reviewer.getCategoryPath %>" maxlength="100" type="text" class="border-1 border-slate-200 bg-slate-50 rounded-md appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-56" />
+        <% reviewer.errors.full_messages_for(:categories).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+</div>
