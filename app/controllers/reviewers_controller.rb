@@ -14,8 +14,9 @@ class ReviewersController < ApplicationController
     if params[:sort] != nil
       @sort_direction = params[:sort].to_sym
     end
-
-    @reviewers = Reviewer.where(category: params[:category], platform: @platform)
+    # select * from reviewers left join category C on category.reviewer_id = id where C.name = 'videogames'
+    @reviewers = Reviewer.joins(:categories).where('categories.name = ? AND reviewers.platform = ?', params[:category], @platform)
+    # @reviewers = Reviewer.where(category: params[:category], platform: @platform)
     if @sort_direction == :asc
       @reviewers = @reviewers.sort { |reviewerOne, reviewerTwo| reviewerOne.finalRating <=> reviewerTwo.finalRating }
     else
