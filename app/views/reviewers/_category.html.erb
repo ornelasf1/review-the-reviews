@@ -6,6 +6,7 @@
         <%= categories_form.text_field :path, { class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-56" } %>
     </div>
     <% if showDeleteBtn %>
+        <%= categories_form.hidden_field :_destroy %>
         <%= link_to "Delete", '#', id: "remove_category", class: 'text-center self-center', :onclick => 'deleteCategoryFieldset(event, this)' %>
     <% end %>
 </fieldset>

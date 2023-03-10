@@ -51,8 +51,8 @@
     }
     function deleteCategoryFieldset(e, selfElement) {
         e.preventDefault();
-        selfElement.parentNode.nextElementSibling.remove();
-        selfElement.parentNode.remove();
+        selfElement.parentElement.querySelector("input[type=hidden]").setAttribute("value", "1");
+        selfElement.parentElement.setAttribute("style", "display: none") 
     }
     </script>
 <% end %>
