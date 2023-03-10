@@ -1,4 +1,4 @@
-<%= form_with model: reviewer, class: 'space-y-2' do |form| %>
+<%= form_with model: reviewer, class: 'space-y-2', html: { "x-data": "{ platform: '' }" } do |form| %>
     <div>
         <%= form.label :name, class: 'text-md font-medium text-slate-700' %><br>
         <%= form.text_field :name, maxlength: "100", class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
@@ -7,6 +7,13 @@
         <% end %>
     </div>
     <div>
+        <%= form.label :platform, class: 'text-md font-medium text-slate-700' %><br>
+        <%= form.select :platform, platformMap.map {|platformSym, platformName| [platformName, platformSym.to_s] }, {}, class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", "x-model": "platform" %>
+        <% reviewer.errors.full_messages_for(:platform).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+    <div x-show="platform === 'website'">
         <%= form.label :hostname, class: 'text-md font-medium text-slate-700' %><br>
         <%= form.text_field :hostname, maxlength: "100", class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
         <% reviewer.errors.full_messages_for(:hostname).each do |message| %>
@@ -21,13 +28,6 @@
         <% end %>
     </div>
     <div>
-        <%= form.label :platform, class: 'text-md font-medium text-slate-700' %><br>
-        <%= form.select :platform, platformMap.map {|platformSym, platformName| [platformName, platformSym.to_s] }, { include_blank: true }, class: "border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-        <% reviewer.errors.full_messages_for(:platform).each do |message| %>
-            <div><%= message %></div>
-        <% end %>
-    </div>
-    <div x-data>
         <div class="grid grid-cols-5 mb-2">
             <%= form.label :categories, class: 'text-md font-medium text-slate-700 col-span-1' %>
             <%= form.label :categories, "Category URL Path", class: 'text-md font-medium text-slate-700 col-span-1 ml-2' %>
@@ -37,8 +37,9 @@
         <% end %>
         <%= link_to_add_category "Add Category", form, :categories %>
     </div>
-    <div class="flex flex-row justify-center">
-        <%= form.submit 'Submit', class: 'btn bg-sky-700 text-white py-2 rounded-md px-10 cursor-pointer' %>
+    <div class="flex flex-row justify-start space-x-4 items-center pt-10">
+        <%= form.submit 'Save', class: 'btn bg-sky-700 text-white py-2 rounded-md px-10 cursor-pointer' %>
+        <%= link_to 'Back', @reviewer, class: 'underline' %>
     </div>
     <script>
     function addCategoryFieldset(e) {
