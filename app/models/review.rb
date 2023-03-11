@@ -6,6 +6,8 @@ class Review < ApplicationRecord
   belongs_to :reviewer
   has_one :rating
 
-  validates :commenter, presence: true, length: {minimum:3, maximum:30}
+  accepts_nested_attributes_for :rating
+
+  validates :commenter, length: {minimum:3, maximum:30}
   validates :body, length: {maximum: 2000}
 end

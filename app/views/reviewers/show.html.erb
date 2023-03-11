@@ -33,56 +33,7 @@
         <p class="text-slate-700 text-md"><%= @reviewer.review %></p>
       </div>
     </section>
-    <section class="relative">
-      <div class="max-w-6xl mx-auto my-8 px-4 py-4 bg-white">
-        <%= form_with(model: @review, url: reviewer_path(@reviewer) + '/reviews') do |form| %>
-          <label>Leave your Review</label>
-          <div class="grid grid-cols-2 py-4">
-            <!-- Left side -->
-            <div>
-              <div class="mt-2">
-                <label class="block text-gray-700 text-sm font-bold" for="review_name">
-                  Name
-                </label>
-                <input class="border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="review_name" type="text" placeholder="Name" name="review[commenter]" maxlength="30">
-              </div>
-              <div class="mt-2">
-                <label class="block text-gray-700 text-sm font-bold" for="review_body">
-                  Review
-                </label>
-                <textarea class="border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="review_body" type="text" placeholder="Your thoughts..." rows="4" name="review[body]" maxlength="500">
-                </textarea>
-              </div>
-            </div>
-
-            <!-- Right side -->
-            <div class="mx-8">
-              <h5 class="h5 mb-2">Please rate <%= @reviewer.name %> based on any of these aspects</h5>
-              <div class="flex flex-col space-y-2">
-                <div class="flex flex-row items-center justify-between">
-                  <label for="usability-rate" class="text-md font-normal text-gray-700">Usability</label>
-                  <%= form.number_field 'rating[usability]', in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
-                </div>
-                <div class="flex flex-row items-center justify-between">
-                  <label for="entertainment-rate" class="text-md font-normal text-gray-700">Entertainment Value</label>
-                  <%= form.number_field 'rating[entertainment]', in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
-                </div>
-                <div class="flex flex-row items-center justify-between">
-                  <label for="wellwritten-rate" class="text-md font-normal text-gray-700">Well Written</label>
-                  <%= form.number_field 'rating[wellwritten]', in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
-                </div>
-                <div class="flex flex-row items-center justify-between">
-                  <label for="usefulness-rate" class="text-md font-normal text-gray-700">Usefulness</label>
-                  <%= form.number_field 'rating[useful]', in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- <button class="btn bg-sky-700 text-white py-2 rounded-md">Submit</button> -->
-          <%= form.submit "Submit", class: 'btn bg-sky-700 text-white py-2 rounded-md cursor-pointer' %>
-        <% end %>
-      </div>
-    </section>
+    <%= render 'review_form', reviewer: @reviewer %>
 
     <!-- Reviews -->
     <section class="relative">
@@ -92,7 +43,7 @@
           <p class="text-md text-slate-700">No one has left a review yet.</p>
         <% else %>
           <div class="grid grid-cols-2 gap-4">
-            <% @reviewer.reviews.each do |review| %>
+            <% @reviewer.reviews.reject {|review| review.commenter.blank? and review.body.blank? }.each do |review| %>
             <!-- Review card -->
               <%= render "review", review: review %>
             <% end %>

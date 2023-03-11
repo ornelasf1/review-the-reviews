@@ -33,6 +33,18 @@
                     <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= review.rating.useful.to_i %></span> out of 5</p>
                 </div>
             <% end %>
+            <% unless review.rating.insightful == nil %>
+                <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+                    <p class="text-slate-700 text-lg">Insightful</p>
+                    <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= review.rating.insightful.to_i %></span> out of 5</p>
+                </div>
+            <% end %>
+            <% unless review.rating.quality == nil %>
+                <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+                    <p class="text-slate-700 text-lg">Quality</p>
+                    <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= review.rating.quality.to_i %></span> out of 5</p>
+                </div>
+            <% end %>
         </div>
     <% end %>
 </div>
