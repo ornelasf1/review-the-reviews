@@ -12,7 +12,7 @@
                         </header>
                         <p class="text-slate-500 mb-4"><%= reviewer.review %></p>
                         <div class="flex flex-row justify-between mr-10">
-                            <footer><%= reviewer.platform.capitalize %> - <%= link_to "#{reviewer.hostname}", reviewer.hostname, class: 'z-10 text-blue-500 hover:underline' %></footer>
+                            <footer><%= reviewer.platform.capitalize %><%= ' - ' unless reviewer.hostname.blank? %><%= link_to "#{reviewer.hostname}", reviewer.hostname, class: 'z-10 text-blue-500 hover:underline' %></footer>
                             <% unless @review_links.blank? %>
                                 <%= link_to "#{params[:query]} review", @review_links[reviewer.hostname], class: 'z-10 text-blue-500 hover:underline' %>
                             <% else %>

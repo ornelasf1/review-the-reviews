@@ -53,5 +53,5 @@ module ReviewersHelper
           render("category", categories_form: builder, showDeleteBtn: true)
         end
         link_to(name, '#', :onclick => 'addCategoryFieldset(event)', class: "add_categories", data: {id: id, categories: categories.gsub("\n", "")})
-      end
+    end
 end
