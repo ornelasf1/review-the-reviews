@@ -4,7 +4,7 @@ class Review < ApplicationRecord
     self.body = body.strip
   end
   belongs_to :reviewer
-  has_one :rating
+  has_one :rating, dependent: :destroy
 
   accepts_nested_attributes_for :rating
 
