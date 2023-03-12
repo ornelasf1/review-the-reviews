@@ -13,8 +13,16 @@
   </head>
 
   <body class="font-inter antialiased bg-slate-50 text-slate-800 tracking-tight">
-      <p class="notice"><%= notice %></p> 
-      <p class="alert"><%= alert %></p> 
+      <% unless notice.blank? %>
+        <div class="p-4 bg-slate-800">
+          <p class="h5 notice text-slate-200"><%= notice %></p> 
+        </div>
+      <% end %>
+      <% unless alert.blank? %>
+        <div class="p-4 bg-slate-800">
+          <p class="h5 alert text-slate-200"><%= alert %></p> 
+        </div>
+      <% end %>
       <%= yield %>
       <script src="/js/vendors/alpinejs.min.js" defer></script>
       <script src="/js/vendors/aos.js"></script>
