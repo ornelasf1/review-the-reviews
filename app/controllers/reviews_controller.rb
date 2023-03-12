@@ -2,7 +2,9 @@ class ReviewsController < ApplicationController
 
   def create
     @reviewer = Reviewer.find(params[:reviewer_id])
-    @review = @reviewer.reviews.create(review_params)
+    @review = @reviewer.reviews.new(review_params)
+    @review.user_id = current_user.id
+    @review.save
 
     redirect_to reviewer_path(@reviewer)
   end

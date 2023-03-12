@@ -47,7 +47,9 @@
             <% end %>
         </div>
     <% end %>
-    <div class="mt-2">
-        <%= link_to 'Delete', [review.reviewer, review], data: { turbo_confirm: 'Delete comment?', turbo_method: :delete }, class: 'underline text-sky-700' %>
-    </div>
+    <% if user_signed_in? and (current_user.id == review.user_id or review.user_id.blank?) %>
+        <div class="mt-2">
+            <%= link_to 'Delete', [review.reviewer, review], data: { turbo_confirm: 'Delete comment?', turbo_method: :delete }, class: 'underline text-sky-700' %>
+        </div>
+    <% end %>
 </div>
