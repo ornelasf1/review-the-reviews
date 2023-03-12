@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "pages#index"
+  devise_for :users
+  root "pages#index", as: "user"
   
   # get 'reviewers/:category', to: "reviewers#index"
   # get 'reviewers/:category/:id', to: "reviewers#show"

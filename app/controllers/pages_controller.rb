@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   include SearchApi
+
   def index
     @recent_reviewers = Reviewer.order(:created_at).reverse_order.limit(5)
   end
