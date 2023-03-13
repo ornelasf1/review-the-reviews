@@ -31,10 +31,10 @@
           <% end %>
         </div>
       </div>
-      <div class="max-w-6xl mx-auto px-4 mt-4">
-        <p class="text-slate-700 text-md"><%= @reviewer.review %></p>
-      </div>
     </section>
+
+    <%= render 'rating_summary', reviewer: @reviewer, average_rating: @average_rating %>
+
     <%= render 'review_form', reviewer: @reviewer %>
 
     <!-- Reviews -->

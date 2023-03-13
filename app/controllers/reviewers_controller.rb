@@ -30,6 +30,7 @@ class ReviewersController < ApplicationController
 
   def show
     @reviewer = Reviewer.find(params[:id])
+    @average_rating = @reviewer.averageRating
   end
   
   def edit

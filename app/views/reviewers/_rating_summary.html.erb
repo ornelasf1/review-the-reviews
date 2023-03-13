@@ -1,0 +1,51 @@
+<section class="relative">
+    <div class="max-w-6xl mx-auto my-8 px-4 py-4 bg-white space-y-4">
+        <div>
+            <h5 class="h5 font-medium text-md text-slate-700">Summary</h5>
+            <p class="text-slate-700 text-md"><%= @reviewer.review %></p>
+        </div>
+        <% unless average_rating.blank? %>
+            <div class="grid grid-cols-3">
+                <div class="col-span-2">
+                    <h5 class="h5 font-medium text-md text-slate-700">Average Ratings</h5>
+                    <% unless average_rating.usability.blank? %>
+                        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+                            <p class="text-slate-700 text-lg">Usability average</p>
+                            <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= average_rating.usability.to_i %></span> out of 5</p>
+                        </div>
+                    <% end %>
+                    <% unless average_rating.entertainment.blank? %>
+                        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+                            <p class="text-slate-700 text-lg">Entertainment Value</p>
+                            <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= average_rating.entertainment.to_i %></span> out of 5</p>
+                        </div>
+                    <% end %>
+                    <% unless average_rating.wellwritten.blank? %>
+                        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+                            <p class="text-slate-700 text-lg">Well Written</p>
+                            <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= average_rating.wellwritten.to_i %></span> out of 5</p>
+                        </div>
+                    <% end %>
+                    <% unless average_rating.useful.blank? %>
+                        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+                            <p class="text-slate-700 text-lg">Usefulness</p>
+                            <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= average_rating.useful.to_i %></span> out of 5</p>
+                        </div>
+                    <% end %>
+                    <% unless average_rating.insightful.blank? %>
+                        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+                            <p class="text-slate-700 text-lg">Insightful</p>
+                            <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= average_rating.insightful.to_i %></span> out of 5</p>
+                        </div>
+                    <% end %>
+                    <% unless average_rating.quality.blank? %>
+                        <div class="flex justify-between border-b-2 border-slate-200 items-baseline">
+                            <p class="text-slate-700 text-lg">Quality</p>
+                            <p class="text-xs text-slate-400"><span class="text-slate-700 text-2xl font-medium"><%= average_rating.quality.to_i %></span> out of 5</p>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</section>
