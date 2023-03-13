@@ -5,10 +5,12 @@
   <main class="grow">
     <section class="relative">
       <div class="max-w-6xl mx-auto px-4 pt-20 flex flex-row justify-between">
-        <%= link_to edit_reviewer_path(@reviewer) do %>
-            <button class="text-slate-800 font-medium underline">Edit</button>
+        <% if user_signed_in? and current_user.is_admin? %>
+          <%= link_to edit_reviewer_path(@reviewer) do %>
+              <button class="text-slate-800 font-medium underline">Edit</button>
+          <% end %>
+          <%= link_to "Delete", reviewer_path(@reviewer), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'text-slate-800 font-medium underline' %>
         <% end %>
-        <%= link_to "Delete", reviewer_path(@reviewer), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'text-slate-800 font-medium underline' %>
       </div>
     </section>
     <section class="relative">

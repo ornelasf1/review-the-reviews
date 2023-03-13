@@ -33,10 +33,16 @@ class ReviewersController < ApplicationController
   end
   
   def edit
+    unless check_authorized
+      return
+    end
     @reviewer = Reviewer.find(params[:id])
   end
   
-  def update                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+  def update
+    unless check_authorized
+      return
+    end
     @reviewer = Reviewer.find(params[:id])
 
     if @reviewer.update(reviewer_params)
@@ -47,11 +53,17 @@ class ReviewersController < ApplicationController
   end
 
   def new
+    unless check_authorized
+      return
+    end
     @reviewer = Reviewer.new
     @reviewer.categories.build
   end
 
   def create
+    unless check_authorized
+      return
+    end
     @reviewer = Reviewer.create(reviewer_params)
 
     if @reviewer.save
@@ -71,6 +83,14 @@ class ReviewersController < ApplicationController
   private
   def reviewer_params
     params.require(:reviewer).permit(:name, :review, :hostname, :platform, categories_attributes: [:name, :path, :id, :_destroy] )
+  end
+
+  def check_authorized
+    unless user_signed_in? and current_user.is_admin?
+      render plain: 'Unauthorized user.', status: :unauthorized
+      return false
+    end
+    return true
   end
 
 end
