@@ -7,16 +7,12 @@
                     <!-- Left side -->
                     <div>
                         <div class="mt-2">
-                        <label class="block text-gray-700 text-sm font-bold" for="review_name">
-                            Name
-                        </label>
-                        <input class="border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="review_name" type="text" placeholder="Name" name="review[commenter]" maxlength="30">
+                            <%= form.label :commenter, 'Name', class: "block text-gray-700 text-sm font-bold" %>
+                            <%= form.text_field :commenter, placeholder: 'Name', maxlength: "30", class: 'border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'%>
                         </div>
                         <div class="mt-2">
-                        <label class="block text-gray-700 text-sm font-bold" for="review_body">
-                            Review
-                        </label>
-                        <textarea class="border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="review_body" type="text" placeholder="Your thoughts..." rows="4" name="review[body]" maxlength="500"></textarea>
+                            <%= form.label :body, 'Review', class: "block text-gray-700 text-sm font-bold" %>
+                            <%= form.text_area :body, placeholder: 'Your thoughts...', rows: 4, maxlength: "500", class: 'border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'%>
                         </div>
                     </div>
 
