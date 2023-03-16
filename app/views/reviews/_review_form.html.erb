@@ -1,0 +1,70 @@
+<section class="relative">
+    <%= turbo_frame_tag 'new_review' do %>
+        <div class="max-w-6xl mx-auto my-8 px-4 py-4 bg-white">
+            <% if user_signed_in? %>
+                <%= form_with model: [reviewer, reviewer.reviews.build] do |form| %>
+                    <label>Leave your Review</label>
+                    <div class="grid grid-cols-2 py-4">
+                        <!-- Left side -->
+                        <div>
+                            <div class="mt-2">
+                                <%= form.label :commenter, 'Name', class: "block text-gray-700 text-sm font-bold" %>
+                                <%= form.text_field :commenter, placeholder: 'Name', maxlength: "30", class: 'border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'%>
+                                <% @review.blank? || @review.errors.full_messages_for(:commenter).each do |message| %>
+                                    <div><%= message %></div>
+                                <% end %>
+                            </div>
+                            <div class="mt-2">
+                                <%= form.label :body, 'Review', class: "block text-gray-700 text-sm font-bold" %>
+                                <%= form.text_area :body, placeholder: 'Your thoughts...', rows: 4, maxlength: "500", class: 'border-1 border-slate-200 bg-slate-50 rounded-md appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'%>
+                                <% @review.blank? || @review.errors.full_messages_for(:body).each do |message| %>
+                                    <div><%= message %></div>
+                                <% end %>
+                            </div>
+                        </div>
+
+                        <!-- Right side -->
+                        <div class="mx-8">
+                            <h5 class="h5 mb-2">Please rate <%= reviewer.name %> based on any of these aspects</h5>
+                            <%= form.fields_for :rating, Rating.new, class: "flex flex-col space-y-2" do |ratings_form| %>
+                                <div class="flex flex-row items-center justify-between">
+                                    <label for="entertainment-rate" class="text-md font-normal text-gray-700">Entertainment Value</label>
+                                    <%= ratings_form.number_field :entertainment, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                                </div>
+                                <% if reviewer.platform == 'website'%>
+                                    <div class="flex flex-row items-center justify-between">
+                                        <label for="usability-rate" class="text-md font-normal text-gray-700">Usability</label>
+                                        <%= ratings_form.number_field :usability, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                                    </div>
+                                    <div class="flex flex-row items-center justify-between">
+                                        <label for="wellwritten-rate" class="text-md font-normal text-gray-700">Well Written</label>
+                                        <%= ratings_form.number_field :wellwritten, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                                    </div>
+                                    <div class="flex flex-row items-center justify-between">
+                                        <label for="usefulness-rate" class="text-md font-normal text-gray-700">Usefulness</label>
+                                        <%= ratings_form.number_field :useful, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                                    </div>
+                                <% elsif reviewer.platform == 'streamer' %>
+                                    <div class="flex flex-row items-center justify-between">
+                                        <label for="insightful-rate" class="text-md font-normal text-gray-700">Insightful</label>
+                                        <%= ratings_form.number_field :insightful, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                                    </div>
+                                    <div class="flex flex-row items-center justify-between">
+                                        <label for="quality-rate" class="text-md font-normal text-gray-700">Quality</label>
+                                        <%= ratings_form.number_field :quality, in: 1..5, step: 1, maxlength: 5, class: 'border-1 border-slate-200 bg-slate-50 rounded-md' %>
+                                    </div>
+                                <% end %>
+                            <% end %>
+                            <% @review.blank? || @review.errors.full_messages_for('rating.base').each do |message| %>
+                                <div><%= message.delete_prefix('Rating base') %></div>
+                            <% end %>
+                        </div>
+                    </div>
+                    <%= form.submit "Submit", class: 'btn bg-sky-700 text-white py-2 rounded-md cursor-pointer' %>
+                <% end %>
+            <% else %>
+                <p class="text-slate-700 font-light text-lg"><%= link_to 'Sign in', new_user_session_path, class: 'text-sky-700' %> to leave your review.</p>
+            <% end %>
+        </div>
+    <% end %>
+</section>

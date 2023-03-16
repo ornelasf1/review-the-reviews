@@ -35,24 +35,13 @@
 
     <%= render 'rating_summary', reviewer: @reviewer, average_rating: @average_rating %>
 
-    <%= render 'review_form', reviewer: @reviewer %>
+    <!-- Review submission form -->
+    <%= render 'reviews/review_form', reviewer: @reviewer %>
 
     <!-- Reviews -->
-    <section class="relative">
-      <div class="max-w-6xl mx-auto px-4 pb-20 flex flex-col justify-between">
-        <h3 class="h3 text-slate-700 mb-4">Reviews <span class="font-light text-xl">(<%= @reviewer.numOfCritics %>)</span></h3>
-        <% if @reviewer.numOfCritics == 0 %>
-          <p class="text-md text-slate-700">No one has left a review yet.</p>
-        <% else %>
-          <div class="grid grid-cols-2 gap-4">
-            <% @reviewer.reviews.reject {|review| review.commenter.blank? and review.body.blank? }.each do |review| %>
-            <!-- Review card -->
-              <%= render "review", review: review %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </section>
+    <%= turbo_frame_tag 'reviews' do %>
+      <%= render 'reviews/reviews', reviewer: @reviewer %>
+    <% end %>
   </main>
   <!-- Site footer -->
   <%= render 'shared/footer' %>

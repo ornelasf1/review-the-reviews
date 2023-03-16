@@ -1,0 +1,2 @@
+<%# https://www.hotrails.dev/turbo-rails/turbo-frames-and-turbo-streams %>
+<%= turbo_stream.update "reviews", partial: "reviews/reviews", locals: { reviewer: @reviewer } %>
