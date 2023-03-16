@@ -24,7 +24,7 @@ class Reviewer < ApplicationRecord
         if self.reviews.count == 0
           return 0
         end
-        finalTotal = self.reviews.reject{ |review| review.rating == nil }.reduce(0) do |aggregate, review|
+        finalTotal = self.reviews.reject{ |review| isRatingNil?(review.rating) }.reduce(0) do |aggregate, review|
             total = 0
             numOfRatings = 0
             puts review.rating.to_json
@@ -116,5 +116,10 @@ class Reviewer < ApplicationRecord
 
     def getCategoryPath
         self.categoryPaths[self.category]
+    end
+
+    private
+    def isRatingNil? rating
+        rating == nil || %i(usability wellwritten entertainment useful insightful quality).all? {|sym| rating[sym].blank? }
     end
 end
