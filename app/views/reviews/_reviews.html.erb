@@ -7,10 +7,18 @@
             </div>
         <% else %>
                 <div class="grid grid-cols-2 gap-4">
-                    <% @reviews.reject {|review| review.commenter.blank? and review.body.blank? }.each do |review| %>
-                        <!-- Review card -->
-                        <%= render "reviews/review", review: review %>
-                    <% end %>
+                    <div class="flex flex-col space-y-4">
+                        <% @reviews.reject.each_with_index {|review, idx| idx % 2 == 1 }.each do |review| %>
+                            <!-- Review card -->
+                            <%= render "reviews/review", review: review %>
+                        <% end %>
+                    </div>
+                    <div class="flex flex-col space-y-4">
+                        <% @reviews.reject.each_with_index {|review, idx| idx % 2 == 0 }.each do |review| %>
+                            <!-- Review card -->
+                            <%= render "reviews/review", review: review %>
+                        <% end %>
+                    </div>
                 </div>
                 <%= paginate reviews %>
         <% end %>

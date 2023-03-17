@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
       @review = @reviewer.reviews.new(review_params)
       @review.user_id = current_user.id
       if @review.save
-        @reviews = @reviewer.reviews.page(params[:page])
+        @reviews = @reviewer.reviews.order(created_at: :desc).page(params[:page])
         respond_to do |format|
           format.html { redirect_to reviewer_path(@reviewer), notice: 'Thanks for posting!'}
           format.turbo_stream
