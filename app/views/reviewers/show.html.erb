@@ -40,7 +40,7 @@
 
     <!-- Reviews -->
     <%= turbo_frame_tag 'reviews' do %>
-      <%= render 'reviews/reviews', reviewer: @reviewer %>
+      <%= render 'reviews/reviews', reviewer: @reviewer, reviews: @reviews %>
     <% end %>
   </main>
   <!-- Site footer -->

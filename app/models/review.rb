@@ -1,4 +1,5 @@
 class Review < ApplicationRecord
+  paginates_per 10
   before_save do 
     self.commenter = commenter.strip
     self.body = body.strip

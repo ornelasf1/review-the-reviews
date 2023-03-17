@@ -40,6 +40,7 @@
                 <a class="absolute w-full h-full top-0 left-0" href="/reviewers/<%= reviewer.id.to_s %>"></a>
             </article>
         <% end %>
+        <%= paginate reviewers %>
     <% else %>
         <h3 class="h3 text-slate-700 font-light text-base">Nothing here...yet.</h3>
     <% end %>

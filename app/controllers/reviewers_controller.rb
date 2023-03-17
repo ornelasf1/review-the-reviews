@@ -14,12 +14,13 @@ class ReviewersController < ApplicationController
     if params[:sort] != nil
       @sort_direction = params[:sort].to_sym
     end
-    @reviewers = Reviewer.joins(:categories).where('categories.name = ? AND reviewers.platform = ?', params[:category], @platform)
-    if @sort_direction == :asc
-      @reviewers = @reviewers.sort { |reviewerOne, reviewerTwo| reviewerOne.finalRating <=> reviewerTwo.finalRating }
-    else
-      @reviewers = @reviewers.sort { |reviewerOne, reviewerTwo| reviewerTwo.finalRating <=> reviewerOne.finalRating }
-    end
+
+    @reviewers = Reviewer.joins(:categories).where('categories.name = ? AND reviewers.platform = ?', params[:category], @platform).page(params[:page])
+    # if @sort_direction == :asc
+    #   @reviewers = @reviewers.sort { |reviewerOne, reviewerTwo| reviewerOne.finalRating <=> reviewerTwo.finalRating }
+    # else
+    #   @reviewers = @reviewers.sort { |reviewerOne, reviewerTwo| reviewerTwo.finalRating <=> reviewerOne.finalRating }
+    # end
 
     if turbo_frame_request?
       respond_to do |format|
@@ -30,6 +31,7 @@ class ReviewersController < ApplicationController
 
   def show
     @reviewer = Reviewer.find(params[:id])
+    @reviews = @reviewer.reviews.order(created_at: :desc).page(params[:page])
     @average_rating = @reviewer.averageRating
   end
   

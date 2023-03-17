@@ -7,11 +7,12 @@
             </div>
         <% else %>
                 <div class="grid grid-cols-2 gap-4">
-                    <% @reviewer.reviews.reject {|review| review.commenter.blank? and review.body.blank? }.each do |review| %>
+                    <% @reviews.reject {|review| review.commenter.blank? and review.body.blank? }.each do |review| %>
                         <!-- Review card -->
                         <%= render "reviews/review", review: review %>
                     <% end %>
                 </div>
+                <%= paginate reviews %>
         <% end %>
     </div>
 </section>

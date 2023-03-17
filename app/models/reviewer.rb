@@ -1,4 +1,5 @@
 class Reviewer < ApplicationRecord
+    paginates_per 10
     before_save do 
         self.name = name.strip
         self.review = review.strip
