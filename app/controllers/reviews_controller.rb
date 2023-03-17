@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
       @review.user_id = current_user.id
       if @review.save
         respond_to do |format|
-          format.html { redirect_to reviewer_path(@reviewer), notice: 'Review was successfully created.' }
+          format.html { redirect_to reviewer_path(@reviewer), notice: 'Thanks for posting!'}
           format.turbo_stream
         end
       else

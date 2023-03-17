@@ -2,6 +2,7 @@
     <%= turbo_frame_tag 'new_review' do %>
         <div class="max-w-6xl mx-auto my-8 px-4 py-4 bg-white">
             <% if user_signed_in? %>
+                <p id='thanks_posting' class="text-slate-700 font-light text-lg hidden">Thanks for posting!</p>
                 <%= form_with model: [reviewer, reviewer.reviews.build] do |form| %>
                     <label>Leave your Review</label>
                     <div class="grid grid-cols-2 py-4">
@@ -68,3 +69,9 @@
         </div>
     <% end %>
 </section>
+<script>
+addEventListener("turbo:submit-end", ({ target }) => {
+    target.classList.add('hidden');
+    document.getElementById('thanks_posting').classList.remove('hidden');
+})
+</script>
