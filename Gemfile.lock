@@ -239,6 +239,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.1-x64-mingw-ucrt)
+    sqlite3 (1.6.1-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     tailwindcss-rails (2.0.22-x64-mingw-ucrt)
@@ -294,6 +296,7 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.2)
   selenium-webdriver
   sprockets-rails
+  sqlite3 (~> 1.4)
   stimulus-rails
   tailwindcss-rails (~> 2.0)
   turbo-rails
