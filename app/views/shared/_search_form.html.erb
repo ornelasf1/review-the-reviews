@@ -1,0 +1,12 @@
+<!-- Section header -->
+<div class="max-w-3xl mx-auto text-center">
+    <h1 class="h1 font-playfair-display text-slate-100 mb-4">Review the Reviewers</h1>
+    <p class="text-xl text-slate-400 mb-8">Look up a product or a reviewer.</p>
+    <%= form_with url: "/search", method: "get", class: 'space-y-2' do |form| %>
+        <div class="flex flex-row space-x-2" x-data="{ searchQuery: '' }">
+            <%= form.select :category, categoryMap.map {|categorySym, categoryName| [categoryName, categorySym.to_s] }, {selected: params[:category]}, { class: "border-1 text-white border-slate-700 bg-slate-800 rounded-md appearance-none text-gray-700 leading-tight focus:outline-none focus:shadow-outline"} %>
+            <%= form.text_field :query, class: "form-input w-full rounded-md bg-slate-800 border border-slate-700 focus:border-slate-600 text-white placeholder-slate-500 mb-0 mr-2", placeholder: "Product or reviewer", value: params[:query], "x-model": "searchQuery" %>
+            <%= form.submit 'Search', class: 'btn text-white bg-blue-600 hover:bg-blue-700 cursor-pointer disabled:cursor-auto disabled:bg-slate-800 disabled:text-slate-400', "x-bind:disabled": "searchQuery.length === 0" %>
+        </div>
+    <% end %>
+</div>

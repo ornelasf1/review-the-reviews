@@ -13,7 +13,7 @@ class PagesController < ApplicationController
 
     @review_links = get_reviewers_for_product params[:query]
     puts @review_links
-    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).where(hostname: @review_links.keys)
+    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).where(hostname: @review_links.keys).page params[:page]
   end
 
   private
