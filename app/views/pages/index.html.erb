@@ -19,10 +19,10 @@
             <h3 class="text-lg font-semibold text-slate-700">Reviewers by Category</h3>
 
           </div>
-          <div class="flex max-w-4xl mx-auto flex-wrap justify-around">
+          <div class="flex max-w-4xl mx-auto flex-wrap justify-center">
             <% category_syms.each do |category| %>
               <%= link_to controller: "reviewers", category: category do %>
-                <div class="btn min-w-48 mb-4 bg-white rounded-md shadow hover:shadow-md hover:bg-slate-50">
+                <div class="btn min-w-min w-48 h-14 mx-4 mb-4 bg-white rounded-md shadow hover:shadow-md hover:bg-slate-50">
                   <p class="font-medium text-slate-600 text-sm text-center"><%= categoryName(category) %></p>
                 </div>
               <% end %>
