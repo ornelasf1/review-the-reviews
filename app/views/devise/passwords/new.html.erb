@@ -6,25 +6,11 @@
       <div class="w-full max-w-md mx-auto">
               <!-- Site branding -->
 
-              <h2 class="h2 font-playfair-display text-slate-800 mb-12">Forgot your password?</h2>
+              <h4 class="h4 text-slate-800">Forgot your password?</h4>
 
-              <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-                <%= render "devise/shared/error_messages", resource: resource %>
-
-                <div class="space-y-4">
-
-                  <div class="field">
-                    <%= f.label :email, class: "block text-sm font-medium mb-1" do %>
-                      Email <span class="text-rose-500">*</span>
-                    <% end %>
-                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input py-2 w-full" %>
-                  </div>
-                  <div class="actions pb-4">
-                    <%= f.submit "Send me reset password instructions", class: "btn-sm w-full text-sm text-white bg-blue-600 hover:bg-blue-700 group cursor-pointer" %>
-                  </div>
-                </div>
-
-              <% end %>
+              <p class="text-sm text-slate-700 my-4">
+                Email us at <a href="mailto:psyntax@gmail.com" class="text-sky-700">psyntax@gmail.com</a> with the email address associated with your account to reset your account.
+              </p>
 
               <%= render "devise/shared/links" %>
       </div>

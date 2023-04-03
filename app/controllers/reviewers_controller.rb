@@ -33,8 +33,10 @@ class ReviewersController < ApplicationController
     @reviewer = Reviewer.find(params[:id])
     @reviews = @reviewer.reviews.order(created_at: :desc).page(params[:page])
     @average_rating = @reviewer.averageRating
-    
-    @review_exists = @reviewer.reviews.find_by(user_id: current_user.id)
+
+    if user_signed_in?
+      @review_exists = @reviewer.reviews.find_by(user_id: current_user.id)
+    end
   end
   
   def edit
