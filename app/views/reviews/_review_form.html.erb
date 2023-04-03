@@ -54,7 +54,7 @@
                             <% end %>
                         </div>
                     </div>
-                    <%= form.submit "Submit", class: 'btn bg-sky-700 text-white py-2 rounded-md cursor-pointer' %>
+                    <%= form.submit @review_exists.blank? ? "Submit" : "Overwrite Existing Review", class: 'btn bg-sky-700 text-white py-2 rounded-md cursor-pointer' %>
                 <% end %>
             <% else %>
                 <p class="text-slate-700 font-light text-lg"><%= link_to 'Sign in', new_user_session_path, class: 'text-sky-700' %> to leave your review.</p>

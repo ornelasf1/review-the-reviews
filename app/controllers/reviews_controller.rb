@@ -11,6 +11,12 @@ class ReviewsController < ApplicationController
       @review = @reviewer.reviews.new(review_params)
       @review.commenter = current_user.profile.name
       @review.user_id = current_user.id
+
+      existing_review = @reviewer.reviews.find_by(user_id: current_user.id)
+      if existing_review.present?
+        existing_review.destroy
+      end
+
       if @review.save
         @reviews = @reviewer.reviews.order(created_at: :desc).page(params[:page])
         respond_to do |format|
@@ -31,7 +37,7 @@ class ReviewsController < ApplicationController
       if current_user.is_admin?
         @review = @reviewer.reviews.find(params[:id])
       else
-        @review = @reviewer.reviews.find(id: params[:id], user_id: current_user.id)
+        @review = @reviewer.reviews.find_by(id: params[:id], user_id: current_user.id)
       end
       @review.destroy
       redirect_to reviewer_path(@reviewer), status: :see_other

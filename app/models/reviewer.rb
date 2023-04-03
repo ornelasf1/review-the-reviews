@@ -22,7 +22,8 @@ class Reviewer < ApplicationRecord
 
     def finalRating
         require 'json'
-        if self.reviews.count == 0
+        puts self.reviews.to_json
+        if self.reviews.reject{ |review| isRatingNil?(review.rating) }.count == 0
           return 0
         end
         finalTotal = self.reviews.reject{ |review| isRatingNil?(review.rating) }.reduce(0) do |aggregate, review|

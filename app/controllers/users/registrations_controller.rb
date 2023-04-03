@@ -42,16 +42,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def update_resource(resource, params)
-    # resource.update_without_password(params)
-    resource.update(params)
-    # if params[:password].blank?
-    #   puts 'Update without password'
-    # else
-    #   puts 'Update with password'
-    #   params[:current_password] = current_user.password
-    #   puts params
-    #   super
-    # end
+    if params[:password].blank?
+      resource.update_without_password(params)
+    else
+      resource.update(params)
+    end
   end
 
   def sign_up_params

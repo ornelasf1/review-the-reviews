@@ -1,6 +1,6 @@
 <div class="bg-white shadow-md p-4" x-data="{ expanded: false }">
     <% unless review.body.blank? %>
-        <p class="text-slate-700 text-sm mb-1"><span class="font-semibold"><%= review.commenter %></span> said</p>
+        <p class="text-slate-700 text-sm mb-1"><span class="font-semibold"><%= review.user.profile.name %></span><span class="font-thin text-slate-400 text-xs">#<%= review.user_id %></span> said</p>
         <div class="mb-2">
             <div x-ref="item" class="overflow-hidden" x-transition :style="expanded || $refs.item.scrollHeight &lt; 60 ? 'max-height: ' + $refs.item.scrollHeight + 'px' : 'max-height: ' + $refs.item.scrollHeight / 2 + 'px'">
             <p class="text-slate-500 text-sm"><%= review.body %></p>
@@ -10,7 +10,7 @@
     <% end %>
     <% unless review.rating.blank? %>
         <% if review.body.blank? %>
-            <p class="text-slate-700 text-sm mb-1"><span class="font-semibold"><%= review.commenter %></span> gave the <span class="font-semibold">ratings</span></p>
+            <p class="text-slate-700 text-sm mb-1"><span class="font-semibold"><%= review.user.profile.name %></span> gave the <span class="font-semibold">ratings</span></p>
         <% else %>
             <p class="text-slate-700 text-sm mb-1">and gave the <span class="font-semibold">ratings</span></p>
         <% end %>
