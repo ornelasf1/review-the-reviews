@@ -1,52 +1,52 @@
 <%= render 'shared/header' %>
-  <main class="flex">
-    <div class="min-h-screen w-full h-full flex flex-col justify-center">
+<main class="flex">
+  <div class="min-h-screen w-full h-full flex flex-col justify-center">
 
-      <div class="px-5 sm:px-6">
-        <div class="w-full max-w-md mx-auto">
+    <div class="px-5 sm:px-6">
+      <div class="w-full max-w-md mx-auto">
 
-          <h2 class="h2 font-playfair-display text-slate-800 mb-12">Sign up</h2>
+        <h2 class="h2 font-playfair-display text-slate-800 mb-12">Sign up</h2>
 
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%= render "devise/shared/error_messages" , resource: resource %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages" , resource: resource %>
 
-              <div class="space-y-4">
-                <div class="field">
-                  <%= f.label :email, class: "block text-sm font-medium mb-1" do %>
-                    Email <span class="text-rose-500">*</span>
-                    <% end %>
-                      <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-input py-2 w-full"
-                        %>
-                </div>
-
-                <div class="field">
-                  <%= f.label :password, class: "block text-sm font-medium mb-1" do %>
-                    Password <span class="text-rose-500">*</span>
-                    <% end %>
-                      <% if @minimum_password_length %>
-                        <em>(<%= @minimum_password_length %> characters minimum)</em>
-                        <% end %><br />
-                          <%= f.password_field :password, autocomplete: "new-password" , class: "form-input py-2 w-full"
-                            %>
-                </div>
-
-                <div class="field">
-                  <%= f.label :password_confirmation, class: "block text-sm font-medium mb-1" do %>
-                    Password confirmation <span class="text-rose-500">*</span>
-                    <% end %>
-                      <%= f.password_field :password_confirmation, autocomplete: "new-password" ,
-                        class: "form-input py-2 w-full" %>
-                </div>
-                <div class="actions pb-4">
-                  <%= f.submit "Sign up" ,
-                    class: "btn-sm w-full text-sm text-white bg-blue-600 hover:bg-blue-700 group cursor-pointer" %>
-                </div>
+            <div class="space-y-4">
+              <div class="field">
+                <%= f.label :email, class: "block text-sm font-medium mb-1" do %>
+                  Email <span class="text-rose-500">*</span>
+                  <% end %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-input py-2 w-full"
+                      %>
               </div>
 
-              <% end %>
+              <div class="field">
+                <%= f.label :password, class: "block text-sm font-medium mb-1" do %>
+                  Password <span class="text-rose-500">*</span>
+                  <% end %>
+                    <% if @minimum_password_length %>
+                      <em>(<%= @minimum_password_length %> characters minimum)</em>
+                      <% end %><br />
+                        <%= f.password_field :password, autocomplete: "new-password" , class: "form-input py-2 w-full"
+                          %>
+              </div>
 
-              <%= render "devise/shared/links" %>
-        </div>
+              <div class="field">
+                <%= f.label :password_confirmation, class: "block text-sm font-medium mb-1" do %>
+                  Password confirmation <span class="text-rose-500">*</span>
+                  <% end %>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password" ,
+                      class: "form-input py-2 w-full" %>
+              </div>
+              <div class="actions pb-4">
+                <%= f.submit "Sign up" ,
+                  class: "btn-sm w-full text-sm text-white bg-blue-600 hover:bg-blue-700 group cursor-pointer" %>
+              </div>
+            </div>
+
+            <% end %>
+
+            <%= render "devise/shared/links" %>
       </div>
     </div>
-  </main>
+  </div>
+</main>

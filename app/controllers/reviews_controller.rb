@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
     @reviewer = Reviewer.find(params[:reviewer_id])
     if user_signed_in?
       @review = @reviewer.reviews.new(review_params)
+      @review.commenter = current_user.profile.name
       @review.user_id = current_user.id
       if @review.save
         @reviews = @reviewer.reviews.order(created_at: :desc).page(params[:page])
@@ -41,6 +42,6 @@ class ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:commenter, :body, rating_attributes: [:wellwritten, :useful, :usability, :entertainment, :quality, :insightful])
+    params.require(:review).permit(:body, rating_attributes: [:wellwritten, :useful, :usability, :entertainment, :quality, :insightful])
   end
 end

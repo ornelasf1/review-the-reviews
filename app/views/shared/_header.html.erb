@@ -12,7 +12,7 @@
             </div>
 
             <!-- Desktop navigation -->
-            <nav class="hidden md:flex md:grow">
+            <nav class="hidden md:flex md:grow space-x-2">
 
                 <!-- Desktop menu links -->
                 <ul class="flex grow justify-start flex-wrap items-center">
@@ -75,7 +75,10 @@
                         <button class="btn bg-sky-700 text-white py-2">Create Reviewer</button>
                     <% end %>
                 <% end %>
-                 <%= render "shared/user_auth_link"%>
+                <% if user_signed_in? %>
+                    <%= link_to current_user.profile.blank? ? current_user.email : current_user.profile.name, edit_user_registration_path, class: 'btn py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 font-semibold hover:bg-' %>
+                <% end %>
+                <%= render "shared/user_auth_link"%>
             </nav>
 
         </div>
