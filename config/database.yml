@@ -10,10 +10,10 @@ default: &default
 
 psql: &psql
   adapter: postgresql
-  database: rdreviewersdb
+  database: main
   host: localhost
   port: 5432
-  username: ror_admin
+  username: rdr_admin
   password: <%= ENV['DATABASE_PW'] %>
 
 sqlite: &sqlite

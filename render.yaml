@@ -1,7 +1,7 @@
 databases:
-  - name: rdreviewersdb
-    databaseName: rdreviewersdb
-    user: ror_admin
+  - name: main
+    databaseName: main
+    user: rdr_admin
 
 services:
   - type: web
