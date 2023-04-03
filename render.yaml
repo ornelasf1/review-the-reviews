@@ -1,6 +1,6 @@
 databases:
-  - name: main
-    databaseName: main
+  - name: rdreviewersdb
+    databaseName: rdreviewersdb
     user: ror_admin
 
 services:
