@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   include SearchApi
 
   def index
-    @recent_reviewers = Reviewer.order(:created_at).reverse_order.limit(5).page params[:page]
+    @recent_reviewers = Reviewer.order(:created_at).reverse_order.page params[:page]
   end
 
   def search
@@ -13,6 +13,8 @@ class PagesController < ApplicationController
 
     @review_links = get_reviewers_for_product params[:query]
     puts @review_links
+    @products_map = get_products @review_links, params[:category]
+    puts @products_map
     @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).where(hostname: @review_links.keys).page params[:page]
   end
 
@@ -39,5 +41,17 @@ class PagesController < ApplicationController
 
     format_text = text.strip
     Reviewer.where("name LIKE ?", "%" + Reviewer.sanitize_sql_like(format_text) + "%").first
+  end
+
+  def get_products hostname_to_url_map, category
+    hostname_to_product_map = Hash.new
+    hostname_to_url_map.each do |hostname, url|
+      scraper = ScraperFactory.getscraper hostname
+      if scraper.blank?
+        next
+      end
+      hostname_to_product_map[hostname] = scraper.getproduct(category.to_sym, url)
+    end
+    hostname_to_product_map
   end
 end

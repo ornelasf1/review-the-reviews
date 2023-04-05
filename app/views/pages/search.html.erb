@@ -17,7 +17,7 @@
         <section class="relative">
           <div class="max-w-6xl mx-auto px-4">
             <p class="text-lg text-slate-700 my-4">Publishers that have reviewed <span class="font-semibold"><%= params[:query] %></span></p>
-            <%= render 'reviewers/list', reviewers: @reviewers %>
+            <%= render 'reviewers/product_reviewers', reviewers: @reviewers %>
           </div>
         </section>
 

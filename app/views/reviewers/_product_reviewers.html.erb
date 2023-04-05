@@ -1,20 +1,23 @@
 <div class="space-y-4">
     <% if reviewers.count != 0 %>
         <% reviewers.each do |reviewer| %>
+            <% product = @products_map[reviewer.hostname] %>
             <article class="relative bg-white p-6 px-8 shadow-lg" data-aos="fade-up" data-aos-anchor="[data-aos-id-support]">
                 <div class="grid grid-cols-6 divide-x-2">
                     <!-- Content -->
                     <div class="col-start-1 col-span-5">
-                        <header>
-                        <h4 class="text-slate-700 text-xl font-bold mb-2">
-                            <%= reviewer.name %>
-                        </h4>
+                        <header class="flex flex-row space-x-2">
+                            <h4 class="text-slate-700 text-xl font-bold mb-2">
+                                <%= reviewer.name %>
+                            </h4>
+                            <% unless product.blank? %>
+                                <p class="text-slate-500 mb-4">gave <%= product.name %> a score of <span class="text-slate-700 text-lg font-bold"><%= product.score %></span> out of <%= product.maxscore%></p>
+                            <% end %>
                         </header>
-                        <p class="text-slate-500 mb-4"><%= reviewer.review %></p>
                         <div class="flex flex-row justify-between mr-10">
                             <footer class="z-10"><%= reviewer.platform.capitalize %><%= ' - ' unless reviewer.hostname.blank? %><%= link_to "#{reviewer.hostname}", "https://#{reviewer.hostname}", class: 'text-blue-500 hover:underline', target: "_blank" %></footer>
                             <% unless @review_links.blank? %>
-                                <%= link_to "#{params[:query]} review", @review_links[reviewer.hostname], class: 'text-blue-500 hover:underline' %>
+                                <%= link_to "#{params[:query]} review", @review_links[reviewer.hostname], class: 'z-10 text-blue-500 hover:underline', target: "_blank" %>
                             <% else %>
                                 <footer class="hidden"></footer>
                             <% end %>
@@ -24,7 +27,7 @@
                         <% if reviewer.numOfCritics != 0 %>
                             <p class="text-xs"><%= people_have_reviewed_format_str reviewer.numOfCritics %></p>
                             <% if reviewer.finalRating > 0 %>
-                                <h3 class="h3 text-slate-900 py-4"><%= reviewer.finalRating %><span class="inline text-slate-500 text-sm"> / 5</span></h3>
+                                <h3 class="h3 text-slate-900 py-1"><%= reviewer.finalRating %><span class="inline text-slate-500 text-sm"> / 5</span></h3>
                             <% else %>
                                 <p class="text-slate-900 py-4 font-medium text-base">No ratings yet</p>
                             <% end %>
