@@ -1,28 +1,31 @@
-class MetacriticScraper
+class MetacriticScraper < Scraper
     require 'nokogiri'
-    require 'open-uri'
-
-    @@max_score = 10
     
-    def self.getproduct category, url
-        user_agent = {"User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"}
-        doc = Nokogiri::HTML5(URI.open(url, user_agent))
-        if doc.blank?
-            return nil
-        end
+    MAX_SCORE = 10
+
+    def self.getmaxscore
+        MAX_SCORE
+    end
+
+    def self.getname doc, category
         case category
         when :videogames
-            name = doc.css(".product_title a h1")[0].inner_text.humanize rescue nil
-            score = doc.css(".metascore_w.user.large.game.positive")[0].inner_text.to_f rescue nil
-            Product.new(name: name, score: score, maxscore: @@max_score)
+            doc.css(".product_title a h1")[0].inner_text.humanize
+        when :movies, :tv
+            doc.css(".product_page_title.oswald")[0].inner_text.humanize
+        else
+            nil
+        end
+    end
+
+    def self.getscore doc, category
+        case category
+        when :videogames
+            doc.css(".metascore_w.user.large.game.positive")[0].inner_text.to_f
         when :movies
-            name = doc.css(".product_page_title.oswald")[0].inner_text.humanize rescue nil
-            score = doc.css(".metascore_w.user.larger.movie.positive")[0].inner_text.to_f rescue nil
-            Product.new(name: name, score: score, maxscore: @@max_score)
+            doc.css(".metascore_w.user.larger.movie.positive")[0].inner_text.to_f
         when :tv
-            name = doc.css(".product_page_title.oswald")[0].inner_text.humanize rescue nil
-            score = doc.css(".metascore_w.user.larger.tvshow.positive")[0].inner_text.to_f rescue nil
-            Product.new(name: name, score: score, maxscore: @@max_score)
+            doc.css(".metascore_w.user.larger.tvshow.positive")[0].inner_text.to_f 
         else
             nil
         end

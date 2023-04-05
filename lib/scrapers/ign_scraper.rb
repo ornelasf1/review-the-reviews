@@ -1,24 +1,33 @@
-class IgnScraper
+class IgnScraper < Scraper
     require 'nokogiri'
-    require 'open-uri'
 
-    @@max_score = 10
-    
-    def self.getproduct category, url
-        user_agent = {"User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"}
-        doc = Nokogiri::HTML5(URI.open(url, user_agent))
-        if doc.blank?
-            return nil
-        end
+    MAX_SCORE = 10
+
+    def self.getmaxscore
+        MAX_SCORE
+    end
+
+    def self.getname doc, category
         case category
         when :videogames, :movies
-            name = doc.css(".title4")[0].inner_text rescue nil
-            score = doc.css(".review-score figcaption")[0].inner_text.to_f rescue nil
-            Product.new(name: name, score: score, maxscore: @@max_score)
+            doc.css(".title4")[0].inner_text
         when :tv
-            name = doc.css(".display-title.jsx-2978383395")[0].inner_text rescue nil
-            score = doc.css(".review-score.hexagon-wrapper.jsx-3557151949.small span figcaption")[0].inner_text.to_f rescue nil
-            Product.new(name: name, score: score, maxscore: @@max_score)
+            doc.css(".display-title.jsx-2978383395")[0].inner_text
+        when :technology
+            doc.css(".title5.jsx-1676601084.box-title")[0].inner_text
+        else
+            nil
+        end
+    end
+
+    def self.getscore doc, category
+        case category
+        when :videogames, :movies
+            doc.css(".review-score figcaption")[0].inner_text.to_f
+        when :tv
+            doc.css(".review-score.hexagon-wrapper.jsx-3557151949.small span figcaption")[0].inner_text.to_f
+        when :technology
+            doc.css(".review-score.hexagon-wrapper.jsx-2261199557.xxlarge span figcaption")[0].inner_text.to_f
         else
             nil
         end
