@@ -15,6 +15,10 @@ class IgnScraper
             name = doc.css(".title4")[0].inner_text rescue nil
             score = doc.css(".review-score figcaption")[0].inner_text.to_f rescue nil
             Product.new(name: name, score: score, maxscore: @@max_score)
+        when :tv
+            name = doc.css(".display-title.jsx-2978383395")[0].inner_text rescue nil
+            score = doc.css(".review-score.hexagon-wrapper.jsx-3557151949.small span figcaption")[0].inner_text.to_f rescue nil
+            Product.new(name: name, score: score, maxscore: @@max_score)
         else
             nil
         end

@@ -15,6 +15,14 @@ class MetacriticScraper
             name = doc.css(".product_title a h1")[0].inner_text.humanize rescue nil
             score = doc.css(".metascore_w.user.large.game.positive")[0].inner_text.to_f rescue nil
             Product.new(name: name, score: score, maxscore: @@max_score)
+        when :movies
+            name = doc.css(".product_page_title.oswald")[0].inner_text.humanize rescue nil
+            score = doc.css(".metascore_w.user.larger.movie.positive")[0].inner_text.to_f rescue nil
+            Product.new(name: name, score: score, maxscore: @@max_score)
+        when :tv
+            name = doc.css(".product_page_title.oswald")[0].inner_text.humanize rescue nil
+            score = doc.css(".metascore_w.user.larger.tvshow.positive")[0].inner_text.to_f rescue nil
+            Product.new(name: name, score: score, maxscore: @@max_score)
         else
             nil
         end
