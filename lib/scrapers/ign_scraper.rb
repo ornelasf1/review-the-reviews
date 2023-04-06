@@ -1,6 +1,4 @@
 class IgnScraper < Scraper
-    require 'nokogiri'
-
     MAX_SCORE = 10
 
     def self.getmaxscore

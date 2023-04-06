@@ -1,6 +1,4 @@
 class MetacriticScraper < Scraper
-    require 'nokogiri'
-    
     MAX_SCORE = 10
 
     def self.getmaxscore
@@ -21,11 +19,12 @@ class MetacriticScraper < Scraper
     def self.getscore doc, category
         case category
         when :videogames
-            doc.css(".metascore_w.user.large.game.positive")[0].inner_text.to_f
+            doc.css(".userscore_wrap.feature_userscore .metascore_anchor div")[0].inner_text.to_f
         when :movies
-            doc.css(".metascore_w.user.larger.movie.positive")[0].inner_text.to_f
+            doc.css(".metascore_anchor .metascore_w.user")[0].inner_text.to_f
         when :tv
-            doc.css(".metascore_w.user.larger.tvshow.positive")[0].inner_text.to_f 
+            # doc.css(".userscore_wrap.feature_userscore .metascore_anchor div")[0].inner_text.to_f 
+            doc.css(".metascore_anchor span")[1].inner_text.to_f # https://www.metacritic.com/tv/succession
         else
             nil
         end

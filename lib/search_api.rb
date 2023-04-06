@@ -30,9 +30,9 @@ module SearchApi
     #     "www.ign.com/games" => ["www.review1.com", "www.review2.com"],
     #     "www.gamespot.com" => ["www.review1.com", "www.review2.com", "www.review3.com"]
     # }
-    def search_reviews websites, query
+    def search_reviews category, websites, query
         sites_query = websites.map{ |site| "site:#{site}"}.join ' OR '
-        query="#{sites_query.blank? ? '' : sites_query + ' '}#{query} reviews"
+        query="#{sites_query.blank? ? '' : sites_query + ' '}#{category} #{query} reviews"
         begin
             response = URI.open("https://www.googleapis.com/customsearch/v1?cx=77365176e0c1142f0&key=#{API_KEY}&q=#{query}")
             puts "Searching https://www.googleapis.com/customsearch/v1?cx=77365176e0c1142f0&key=xxx&q=#{query}"

@@ -1,6 +1,4 @@
 class TechradarScraper < Scraper
-    require 'nokogiri'
-
     MAX_SCORE = 5
 
     def self.getmaxscore

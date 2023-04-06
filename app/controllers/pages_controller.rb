@@ -28,10 +28,11 @@ class PagesController < ApplicationController
         next reviewer.hostname + reviewer.catPath
       end
     end
-    hostname_to_reviews_map = search_reviews urls, query
+    hostname_to_reviews_map = search_reviews params[:category], urls, query
     
     # Transform search api to only get the first review on a product
-    hostname_to_reviews_map.each {|key,value| hostname_to_reviews_map[key] = value[0]}
+    # hostname_to_reviews_map.each {|key,value| hostname_to_reviews_map[key] = value[0]}
+    hostname_to_reviews_map
   end
 
   def search_reviewer_by_name text
@@ -43,14 +44,21 @@ class PagesController < ApplicationController
     Reviewer.where("name LIKE ?", "%" + Reviewer.sanitize_sql_like(format_text) + "%").first
   end
 
-  def get_products hostname_to_url_map, category
+  def get_products hostname_to_urls_map, category
     hostname_to_product_map = Hash.new
-    hostname_to_url_map.each do |hostname, url|
+    hostname_to_urls_map.each do |hostname, urls|
       scraper = ScraperFactory.getscraper hostname
       if scraper.blank?
         next
       end
-      hostname_to_product_map[hostname] = scraper.getproduct(category.to_sym, url)
+      product = nil
+      for url in urls do
+        product = scraper.getproduct(category.to_sym, url)
+        if product.present?
+          break
+        end
+      end
+      hostname_to_product_map[hostname] = product
     end
     hostname_to_product_map
   end

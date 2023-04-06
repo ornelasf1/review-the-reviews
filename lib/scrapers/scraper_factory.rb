@@ -6,6 +6,11 @@ class ScraperFactory
         'gamespot' => GamespotScraper,
         'metacritic' => MetacriticScraper,
         'techradar' => TechradarScraper,
+        'rogerebert' => RogerebertScraper,
+        'rottentomatoes' => RottentomatoesScraper,
+        'imdb' => ImdbScraper,
+        'commonsensemedia' => CommonsensemediaScraper,
+        'letterboxd' => LetterboxdScraper,
     }
     def self.getscraper name
         key = @@scraper_map.keys.find {|k| name.downcase.include?(k)}

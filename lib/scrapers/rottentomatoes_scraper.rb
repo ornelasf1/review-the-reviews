@@ -1,5 +1,5 @@
-class GamespotScraper < Scraper
-    MAX_SCORE = 10
+class RottentomatoesScraper < Scraper
+    MAX_SCORE = 100
 
     def self.getmaxscore
         MAX_SCORE
@@ -7,8 +7,8 @@ class GamespotScraper < Scraper
 
     def self.getname doc, category
         case category
-        when :videogames
-            doc.css(".span12 .subnav-list span")[0].inner_text
+        when :movies, :tv
+            doc.css(".scoreboard__title")[0].inner_text
         else
             nil
         end
@@ -16,8 +16,8 @@ class GamespotScraper < Scraper
 
     def self.getscore doc, category
         case category
-        when :videogames
-            doc.css(".review-ring-score__ring")[0].inner_text.to_f
+        when :movies, :tv
+            doc.css(".scoreboard")[0]['tomatometerscore'].to_i
         else
             nil
         end
