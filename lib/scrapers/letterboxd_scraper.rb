@@ -22,10 +22,4 @@ class LetterboxdScraper < Scraper
             nil
         end
     end
-
-    def self.getdocument url
-        browser = Watir::Browser.new :chrome, headless: true
-        browser.goto url
-        Nokogiri::HTML.parse(browser.html)
-    end
 end

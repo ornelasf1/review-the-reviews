@@ -19,37 +19,43 @@ module SearchApi
     # json['items'].each do |obj|
     #     puts obj['link']
     # end
-    API_KEY='AIzaSyDEB47WaNPX9CUha57jp8CpupSkhPVguRk'
+    API_KEY=Rails.application.credentials.google_search_api_key
 
     # Parameters
+    # category, the category to narrow down query
     # websites, an array of urls. e.g. ['www.ign.com/games', 'www.gamespot.com']
     # query, a string of item to look for
     #
     # Returns a hash map of the following form or an empty hash if no results were found
+    # Every bucket has a max of 3 links
     # {
     #     "www.ign.com/games" => ["www.review1.com", "www.review2.com"],
     #     "www.gamespot.com" => ["www.review1.com", "www.review2.com", "www.review3.com"]
     # }
-    def search_reviews category, websites, query
+    def search_reviews category, websites, query, level = 0
         sites_query = websites.map{ |site| "site:#{site}"}.join ' OR '
         query="#{sites_query.blank? ? '' : sites_query + ' '}#{category} #{query} reviews"
         begin
-            response = URI.open("https://www.googleapis.com/customsearch/v1?cx=77365176e0c1142f0&key=#{API_KEY}&q=#{query}")
-            puts "Searching https://www.googleapis.com/customsearch/v1?cx=77365176e0c1142f0&key=xxx&q=#{query}"
+            response = URI.open("https://www.googleapis.com/customsearch/v1?cx=70829007ffd0d4180&key=#{API_KEY}&start=#{(level * 10) + 1}&q=#{query}")
+            puts "Searching https://www.googleapis.com/customsearch/v1?cx=70829007ffd0d4180&key=xxx&start=#{(level * 10) + 1}&q=#{query}"
             json = JSON.parse(response.read)
 
+            hostname_bucket_limit = 5
             hostname_to_reviews = Hash.new
-            json['items'].map do |item|
-                hostname = URI.parse(item['link']).host
-                 if hostname_to_reviews.has_key?(hostname)
-                    hostname_to_reviews[hostname].push(item['link'])
-                 else
-                    hostname_to_reviews[hostname] = [item['link']]
-                 end
+            json['items'].each do |item|
+                # Preserve hostname with path for the map
+                hostname_with_path = websites.find { |website| website.include? URI.parse(item['link']).host }
+                if hostname_to_reviews[hostname_with_path].present? and hostname_to_reviews[hostname_with_path].size >= hostname_bucket_limit
+                    next
+                end
+                if hostname_to_reviews.has_key?(hostname_with_path)
+                    hostname_to_reviews[hostname_with_path].push(item['link'])
+                else
+                    hostname_to_reviews[hostname_with_path] = [item['link']]
+                end
             end
         rescue => e
-            p "error parsing #{json}"
-            p e.message
+            p "error parsing: #{e.message}"
             return Hash.new
         else
             return hostname_to_reviews
