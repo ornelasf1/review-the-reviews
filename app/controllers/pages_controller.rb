@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  require 'concurrent'
   include SearchApi
 
   def index
@@ -48,20 +49,28 @@ class PagesController < ApplicationController
 
   def get_products hostname_to_urls_map, category
     hostname_to_product_map = Hash.new
+    pool = Concurrent::ThreadPoolExecutor.new(
+      min_threads: 5,
+      max_threads: 10,
+      max_queue: 0
+    )
     hostname_to_urls_map.each do |hostname, urls|
-      scraper = ScraperFactory.getscraper hostname
-      if scraper.blank?
-        next
-      end
-      product = nil
-      for url in urls do
-        product = scraper.getproduct(category.to_sym, url)
-        if product.present?
-          break
+      pool.post do
+        scraper = ScraperFactory.getscraper hostname
+        if scraper.blank?
+          return nil
         end
+        product = nil
+        for url in urls do
+          product = scraper.getproduct(category.to_sym, url)
+          if product.present?
+            break
+          end
+        end
+        hostname_to_product_map[hostname] = product
       end
-      hostname_to_product_map[hostname] = product
     end
+    pool.wait_for_termination 10
     hostname_to_product_map
   end
 
