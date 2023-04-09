@@ -11,6 +11,7 @@ class ScraperFactory
         'imdb' => ImdbScraper,
         'commonsensemedia' => CommonsensemediaScraper,
         'letterboxd' => LetterboxdScraper,
+        'gamesradar' => GamesradarScraper,
     }
     def self.getscraper name
         key = @@scraper_map.keys.find {|k| name.downcase.include?(k)}

@@ -64,8 +64,10 @@ class PagesController < ApplicationController
         for url in urls do
           product = scraper.getproduct(category.to_sym, url)
           if product.present?
+            puts "#{hostname} - found product in #{url}"
             break
           end
+          puts "#{hostname} - attempted #{url}"
         end
         hostname_to_product_map[hostname] = product
       end

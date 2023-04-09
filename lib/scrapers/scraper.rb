@@ -8,8 +8,18 @@ class Scraper
         if doc.blank?
             return nil
         end
-        name = getname(doc, category) rescue nil
-        score = getscore(doc, category) rescue nil
+        name = nil
+        begin
+            name = getname(doc, category)
+        rescue => e
+            puts "Failed to get name because #{e}"
+        end
+        score = nil
+        begin
+            score = getscore(doc, category)
+        rescue => e
+            puts "Failed to get score because #{e}"
+        end
         if name.blank? or score.blank?
             return nil
         end
