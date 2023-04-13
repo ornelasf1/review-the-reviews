@@ -12,11 +12,11 @@ class PagesController < ApplicationController
       return redirect_to @reviewer
     end
 
-    @review_links = get_reviewers_for_product params[:query]
-    puts @review_links
-    @products_map = get_products @review_links, params[:category]
+    all_review_links = get_reviewers_for_product params[:query]
+    all_review_links.each {|k,v| puts "#{k} #{v}\n"} 
+    @products_map = get_products all_review_links, params[:category]
     puts @products_map
-    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).where(hostname: @review_links.keys).page params[:page]
+    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).where(hostname: all_review_links.keys).page params[:page]
   end
 
   private

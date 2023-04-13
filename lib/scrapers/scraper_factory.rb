@@ -12,6 +12,9 @@ class ScraperFactory
         'commonsensemedia' => CommonsensemediaScraper,
         'letterboxd' => LetterboxdScraper,
         'gamesradar' => GamesradarScraper,
+        'empireonline' => EmpireonlineScraper,
+        'pcgamer' => PcgamerScraper,
+        'digitaltrends' => DigitaltrendsScraper,
     }
     def self.getscraper name
         key = @@scraper_map.keys.find {|k| name.downcase.include?(k)}

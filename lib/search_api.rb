@@ -36,11 +36,11 @@ module SearchApi
         sites_query = websites.map{ |site| "site:#{site}"}.join ' OR '
         query="#{sites_query.blank? ? '' : sites_query + ' '}#{category} #{query} review"
         begin
-            response = URI.open("https://www.googleapis.com/customsearch/v1?cx=70829007ffd0d4180&key=#{API_KEY}&start=#{(level * 10) + 1}&q=#{query}")
-            puts "Searching https://www.googleapis.com/customsearch/v1?cx=70829007ffd0d4180&key=xxx&start=#{(level * 10) + 1}&q=#{query}"
+            response = URI.open("https://www.googleapis.com/customsearch/v1?cx=70829007ffd0d4180&key=#{API_KEY}&start=#{(level * 10) + 1}&q=#{query}&orTerms=score,rating,review")
+            puts "Searching https://www.googleapis.com/customsearch/v1?cx=70829007ffd0d4180&key=xxx&start=#{(level * 10) + 1}&q=#{query}&orTerms=score,rating,review"
             json = JSON.parse(response.read)
 
-            hostname_bucket_limit = 3
+            hostname_bucket_limit = 5
             hostname_to_reviews = Hash.new
             json['items'].each do |item|
                 # Preserve hostname with path for the map

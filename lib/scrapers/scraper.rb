@@ -11,6 +11,7 @@ class Scraper
         name = nil
         begin
             name = getname(doc, category)
+            name.strip!
         rescue => e
             puts "Failed to get name because #{e}"
         end
@@ -23,7 +24,7 @@ class Scraper
         if name.blank? or score.blank?
             return nil
         end
-        Product.new(name: name, score: score, maxscore: getmaxscore)
+        Product.new(name: name, score: score, maxscore: getmaxscore, source: url)
     end
     
     def self.getmaxscore

@@ -16,8 +16,8 @@
                         </header>
                         <div class="flex flex-row justify-between mr-10">
                             <footer class="z-10"><%= reviewer.platform.capitalize %><%= ' - ' unless reviewer.hostname.blank? %><%= link_to "#{reviewer.hostname}", "https://#{reviewer.hostname}", class: 'text-blue-500 hover:underline', target: "_blank" %></footer>
-                            <% unless @review_links.blank? %>
-                                <%= link_to "#{params[:query]} review", @review_links[reviewer.hostname][0], class: 'z-10 text-blue-500 hover:underline', target: "_blank" %>
+                            <% unless product.blank? or product.source.blank? %>
+                                <%= link_to "#{params[:query]} review", product.source, class: 'z-10 text-blue-500 hover:underline', target: "_blank" %>
                             <% else %>
                                 <footer class="hidden"></footer>
                             <% end %>
