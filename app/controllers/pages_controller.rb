@@ -11,22 +11,22 @@ class PagesController < ApplicationController
     unless @reviewer.blank?
       return redirect_to @reviewer
     end
-
+    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).page params[:page]
+    puts @reviewers.count
     all_review_links = get_reviewers_for_product params[:query]
     all_review_links.each {|k,v| puts "#{k} #{v}\n"} 
     @products_map = get_products all_review_links, params[:category]
     puts @products_map
-    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).where(hostname: all_review_links.keys).page params[:page]
   end
 
   private
   def get_reviewers_for_product query
-    reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).select('reviewers.id, reviewers.name, reviewers.hostname, categories.name as catName, categories.path as catPath')
-    urls = reviewers.reject { |reviewer| reviewer.hostname.blank? }.map do |reviewer|
-      if reviewer.catPath.blank?
+    urls = @reviewers.reject { |reviewer| reviewer.hostname.blank? }.map do |reviewer|
+      reviewer_category = reviewer.categories.where(name: params[:category])[0]
+      if reviewer_category.blank? or reviewer_category.path.blank?
         next reviewer.hostname
       else
-        next reviewer.hostname + reviewer.catPath
+        next reviewer.hostname + reviewer_category.path
       end
     end
     # hostname_to_reviews_map = search_reviews params[:category], urls, query
