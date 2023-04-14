@@ -1,4 +1,5 @@
 class Reviewer < ApplicationRecord
+    include ReviewersHelper
     paginates_per 10
     before_save do 
         self.name = name.strip
@@ -22,14 +23,12 @@ class Reviewer < ApplicationRecord
 
     def finalRating
         require 'json'
-        puts self.reviews.to_json
         if self.reviews.reject{ |review| isRatingNil?(review.rating) }.count == 0
           return 0
         end
         finalTotal = self.reviews.reject{ |review| isRatingNil?(review.rating) }.reduce(0) do |aggregate, review|
             total = 0
             numOfRatings = 0
-            puts review.rating.to_json
             unless review.rating.wellwritten.blank?
                 total += review.rating.wellwritten.to_i
                 numOfRatings += 1

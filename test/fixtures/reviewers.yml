@@ -1,13 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  review: MyText
-  platform: MyString
-  rating: 9.99
+reviewer1:
+  name: Gamespot
+  review: GameSpot is an American video gaming website that provides news, reviews, previews, downloads, and other information on video games. The site was launched on May 1, 1996, created by Pete Deemer, Vince Broady and Jon Epstein.
+  platform: website
+  rating: 0.52e1
+  hostname: www.gamespot.com
 
-two:
-  name: MyString
-  review: MyText
-  platform: MyString
-  rating: 9.99
+# reviewer2:
+#   name: IGN
+#   review: IGN is an American video game and entertainment media website operated by IGN Entertainment Inc., a subsidiary of Ziff Davis, Inc. The company's headquarters is located in San Francisco's SoMa district and is headed by its former editor-in-chief, Peer Schneider.
+#   platform: website
+#   rating: 0.32e1
+#   hostname: www.ign.com
+#   reviews: review2

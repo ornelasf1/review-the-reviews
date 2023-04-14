@@ -1,15 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+rating1:
   usability: 9.99
   wellwritten: 9.99
   entertainment: 9.99
   useful: 9.99
-  review: one
-
-two:
-  usability: 9.99
-  wellwritten: 9.99
-  entertainment: 9.99
-  useful: 9.99
-  review: two
+  review: review1
