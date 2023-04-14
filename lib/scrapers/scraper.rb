@@ -21,9 +21,6 @@ class Scraper
         rescue => e
             puts "Failed to get score because #{e}"
         end
-        if name.blank? or score.blank?
-            return nil
-        end
         Product.new(name: name, score: score, maxscore: getmaxscore, source: url)
     end
     

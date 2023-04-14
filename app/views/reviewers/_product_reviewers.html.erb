@@ -10,14 +10,16 @@
                             <h4 class="text-slate-700 text-xl font-bold mb-2">
                                 <%= reviewer.name %>
                             </h4>
-                            <% unless product.blank? %>
+                            <% if product.available? %>
                                 <p class="text-slate-500 mb-4">gave <%= product.name %> a score of <span class="text-slate-700 text-lg font-bold"><%= product.score %></span> out of <%= product.maxscore%></p>
                             <% end %>
                         </header>
                         <div class="flex flex-row justify-between mr-10">
                             <footer class="z-10"><%= reviewer.platform.capitalize %><%= ' - ' unless reviewer.hostname.blank? %><%= link_to "#{reviewer.hostname}", "https://#{reviewer.hostname}", class: 'text-blue-500 hover:underline', target: "_blank" %></footer>
-                            <% unless product.blank? or product.source.blank? %>
+                            <% if product.available? %>
                                 <%= link_to "#{params[:query]} review", product.source, class: 'z-10 text-blue-500 hover:underline', target: "_blank" %>
+                            <% elsif product.initial_source.present? %>
+                                <%= link_to "#{params[:query]} review", product.initial_source, class: 'z-10 text-blue-500 hover:underline', target: "_blank" %>
                             <% else %>
                                 <footer class="hidden"></footer>
                             <% end %>

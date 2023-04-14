@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   require 'concurrent'
   include SearchApi
+  include Utils
 
   def index
     @recent_reviewers = Reviewer.order(:created_at).reverse_order.page params[:page]
@@ -22,7 +23,7 @@ class PagesController < ApplicationController
   private
   def get_reviewers_for_product query
     urls = @reviewers.reject { |reviewer| reviewer.hostname.blank? }.map do |reviewer|
-      reviewer_category = reviewer.categories.where(name: params[:category])[0]
+      reviewer_category = reviewer.categories.find_by(name: params[:category])
       if reviewer_category.blank? or reviewer_category.path.blank?
         next reviewer.hostname
       else
@@ -61,15 +62,22 @@ class PagesController < ApplicationController
           return nil
         end
         product = nil
+        initial_source = nil # We want to know the initial source to show in the product reviews page the first attempted url - it's likely a relavent helpful url even though it mightve failed to be scraped
         for url in urls do
+          if initial_source.blank?
+            initial_source = url
+          end
           product = scraper.getproduct(category.to_sym, url)
-          if product.present?
+          if product.available?
             puts "#{hostname} - found product in #{url}"
             break
           end
           puts "#{hostname} - attempted #{url}"
         end
-        hostname_to_product_map[hostname] = product
+        product.initial_source = initial_source
+        # hostname to product map is keyed with hostname without path because reviewers store only hostname
+        hostname_without_path = get_hostname hostname
+        hostname_to_product_map[hostname_without_path] = product
       end
     end
     pool.wait_for_termination 10
