@@ -2,7 +2,6 @@
 
 cat1:
   name: videogames
-  path: /videogames
   reviewer: reviewer1
 
 # cat2:

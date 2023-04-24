@@ -14,16 +14,16 @@ class PagesController < ApplicationController
     end
     @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).page params[:page]
     puts @reviewers.count
-    all_review_links = get_reviewers_for_product params[:query]
+    all_review_links = get_reviewers_for_product params[:query], params[:category]
     all_review_links.each {|k,v| puts "#{k} #{v}\n"} 
     @products_map = get_products all_review_links, params[:category]
     puts @products_map
   end
 
   private
-  def get_reviewers_for_product query
+  def get_reviewers_for_product query, category
     urls = @reviewers.reject { |reviewer| reviewer.hostname.blank? }.map do |reviewer|
-      reviewer_category = reviewer.categories.find_by(name: params[:category])
+      reviewer_category = reviewer.categories.find_by(name: category)
       if reviewer_category.blank? or reviewer_category.path.blank?
         next reviewer.hostname
       else
@@ -32,7 +32,7 @@ class PagesController < ApplicationController
     end
     # hostname_to_reviews_map = search_reviews params[:category], urls, query
     hostname_to_reviews_map = Hash.new
-    populate_reviews_for_hostname_map urls, query, hostname_to_reviews_map, 0, 0
+    populate_reviews_for_hostname_map urls, query, category, hostname_to_reviews_map, 0, 0
     
     # Transform search api to only get the first review on a product
     # hostname_to_reviews_map.each {|key,value| hostname_to_reviews_map[key] = value[0]}
@@ -84,7 +84,7 @@ class PagesController < ApplicationController
     hostname_to_product_map
   end
 
-  def populate_reviews_for_hostname_map urls, query, final_hostname_to_reviews_map, stack_max, page_level
+  def populate_reviews_for_hostname_map urls, query, category, final_hostname_to_reviews_map, stack_max, page_level
     puts "========"
     if urls.blank?
       puts "no more urls"
@@ -94,7 +94,7 @@ class PagesController < ApplicationController
       puts "Reached max stack"
       return
     end
-    hostname_to_reviews_map = search_reviews params[:category], urls, query, page_level
+    hostname_to_reviews_map = search_reviews category, urls, query, page_level
     if hostname_to_reviews_map.blank?
       puts "No more results"
       return
@@ -125,6 +125,6 @@ class PagesController < ApplicationController
       page_level = 0
     end
     stack_max += 1
-    populate_reviews_for_hostname_map new_urls, query, final_hostname_to_reviews_map, stack_max, page_level
+    populate_reviews_for_hostname_map new_urls, query, category, final_hostname_to_reviews_map, stack_max, page_level
   end
 end
