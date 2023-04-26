@@ -15,6 +15,11 @@ class ScraperFactory
         'empireonline' => EmpireonlineScraper,
         'pcgamer' => PcgamerScraper,
         'digitaltrends' => DigitaltrendsScraper,
+        'edmunds' => EdmundsScraper,
+        'kbb' => KbbScraper,
+        'nhtsa' => NHTSAScraper,
+        'jdpower' => JdpowerScraper,
+        'caranddriver' => CaranddriverScraper,
     }
     def self.getscraper name
         key = @@scraper_map.keys.find {|k| name.downcase.include?(k)}
