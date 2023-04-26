@@ -6,4 +6,8 @@ module Utils
             URI.parse("http://" + url.strip).hostname
         end
     end
+
+    def strip_www hostname
+        hostname.remove "www."
+    end
 end

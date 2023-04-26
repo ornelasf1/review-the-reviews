@@ -57,9 +57,12 @@ class PagesController < ApplicationController
     )
     hostname_to_urls_map.each do |hostname, urls|
       pool.post do
+        # hostname to product map is keyed with hostname without path because reviewers store only hostname
+        hostname_without_path = get_hostname hostname
         scraper = ScraperFactory.getscraper hostname
         if scraper.blank?
-          return nil
+          hostname_to_product_map[hostname_without_path] = Product.new(initial_source: urls[0])
+          next
         end
         product = nil
         initial_source = nil # We want to know the initial source to show in the product reviews page the first attempted url - it's likely a relavent helpful url even though it mightve failed to be scraped
@@ -75,8 +78,6 @@ class PagesController < ApplicationController
           puts "#{hostname} - attempted #{url}"
         end
         product.initial_source = initial_source
-        # hostname to product map is keyed with hostname without path because reviewers store only hostname
-        hostname_without_path = get_hostname hostname
         hostname_to_product_map[hostname_without_path] = product
       end
     end

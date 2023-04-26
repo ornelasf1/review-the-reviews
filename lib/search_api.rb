@@ -1,4 +1,5 @@
 module SearchApi
+    include Utils
     # require 'nokogiri'
     require 'open-uri'
     require 'json'
@@ -44,8 +45,8 @@ module SearchApi
             hostname_to_reviews = Hash.new
             json['items'].each do |item|
                 # Preserve hostname with path for the map
-                hostname_with_path = websites.find { |website| website.include? URI.parse(item['link']).host }
-                if hostname_to_reviews[hostname_with_path].present? and hostname_to_reviews[hostname_with_path].size >= hostname_bucket_limit
+                hostname_with_path = websites.find { |website| website.include? strip_www(URI.parse(item['link']).host) }
+                if hostname_with_path.blank? and hostname_to_reviews[hostname_with_path].present? and hostname_to_reviews[hostname_with_path].size >= hostname_bucket_limit
                     next
                 end
                 if hostname_to_reviews.has_key?(hostname_with_path)
