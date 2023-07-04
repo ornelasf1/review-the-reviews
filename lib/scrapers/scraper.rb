@@ -56,7 +56,7 @@ class Scraper
 
     def self.getdocument url
         user_agent = {"User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"}
-        if REDIS.info.present?
+        if not REDIS.nil? and REDIS.info.present?
             if REDIS.exists?(url)
                 puts "Retrieving #{url} from cache."
                 return Nokogiri::HTML5(REDIS.get(url))

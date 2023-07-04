@@ -11,4 +11,12 @@ class Product
     def available?
       self.name.present? and self.score.present?
     end
+
+    def ==(other)
+      self.name  == other.name &&
+      self.score == other.score &&
+      self.maxscore == other.maxscore &&
+      self.source == other.source &&
+      self.initial_source == other.initial_source
+    end
 end
