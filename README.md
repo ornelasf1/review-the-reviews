@@ -1,5 +1,23 @@
 # README
 
+## Setup
+Have Ruby 3.1.3 installed. Download from: https://rubyinstaller.org/downloads/archives/
+```
+ruby -v
+```
+Run database migrations
+```
+bin/rails db:migrate
+```
+Compile tailwind styling
+```
+bin/rails tailwindcss:build
+```
+Have Docker installed. Pull Redis docker image
+```
+docker pull redis
+```
+
 ## Start dev environment
 *Note: Because Foreman is broken, we have to use 2 cmd prompts. Foreman is used to start multiple services at once. Normally Foreman is ran by running the script `bin/dev`*
 
