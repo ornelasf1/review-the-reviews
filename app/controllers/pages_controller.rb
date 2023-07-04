@@ -20,6 +20,7 @@ class PagesController < ApplicationController
     # Get product information for every website found.
     @products_map = get_products all_review_links, params[:category]
     puts @products_map.to_yaml
+    puts
   end
 
   private

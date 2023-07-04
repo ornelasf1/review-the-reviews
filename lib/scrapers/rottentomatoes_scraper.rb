@@ -8,7 +8,12 @@ class RottentomatoesScraper < Scraper
     def self.getname doc, category
         case category
         when :movies, :tv
-            doc.css(".scoreboard__title, .title")[0].inner_text
+            queries = [
+                lambda {
+                    doc.css(".scoreboard__title, .title")[0].inner_text
+                },
+            ]
+            getdata queries, "name"
         else
             nil
         end
@@ -17,7 +22,12 @@ class RottentomatoesScraper < Scraper
     def self.getscore doc, category
         case category
         when :movies, :tv
-            doc.css(".scoreboard")[0]['tomatometerscore'].to_i
+            queries = [
+                lambda {
+                    doc.css(".scoreboard, #scoreboard")[0]['tomatometerscore'].to_i
+                },
+            ]
+            getdata queries, "score"
         else
             nil
         end

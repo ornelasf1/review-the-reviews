@@ -8,7 +8,7 @@ class ImdbScraper < Scraper
     def self.getname doc, category
         case category
         when :movies
-            doc.css(".sc-afe43def-0.hnYaOZ")[0].inner_text
+            doc.css(".sc-afe43def-0.hnYaOZ, .sc-afe43def-1.fDTGTb")[0].inner_text
         else
             nil
         end

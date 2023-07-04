@@ -12,6 +12,8 @@ class Scraper
         begin
             name = getname(doc, category)
             name.strip!
+            name.squeeze!(" ")
+            name.delete!("\n")
         rescue => e
             puts "Failed to get name because #{e}"
         end
@@ -34,6 +36,16 @@ class Scraper
 
     def self.getscore doc, category
         nil
+    end
+
+    def self.getdata lambdas, label
+        lambdas.each_with_index do |query, index|
+            begin
+                return query.call 
+            rescue => exception
+                puts "Query (#{index + 1} / #{lambdas.length()}) for getting #{label} failed: #{exception}"
+            end
+        end
     end
 
     def self.getdocument url
