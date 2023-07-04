@@ -1,4 +1,4 @@
-class NHTSAScraper < Scraper
+class NhtsaScraper < Scraper
     MAX_SCORE = 5
 
     def self.getmaxscore

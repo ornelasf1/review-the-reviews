@@ -8,7 +8,7 @@ class RottentomatoesScraper < Scraper
     def self.getname doc, category
         case category
         when :movies, :tv
-            doc.css(".scoreboard__title")[0].inner_text
+            doc.css(".scoreboard__title, .title")[0].inner_text
         else
             nil
         end

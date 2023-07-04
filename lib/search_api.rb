@@ -37,8 +37,8 @@ module SearchApi
         sites_query = websites.map{ |site| "site:#{site}"}.join ' OR '
         query="#{sites_query.blank? ? '' : sites_query + ' '}#{category} #{query} review"
         begin
-            response = URI.open("https://www.googleapis.com/customsearch/v1?cx=70829007ffd0d4180&key=#{API_KEY}&start=#{(level * 10) + 1}&q=#{query}&orTerms=score,rating,review")
-            puts "Searching https://www.googleapis.com/customsearch/v1?cx=70829007ffd0d4180&key=xxx&start=#{(level * 10) + 1}&q=#{query}&orTerms=score,rating,review"
+            puts "Searching https://www.googleapis.com/customsearch/v1?cx=e520e7d4bb4cf4945&key=xxx&start=#{(level * 10) + 1}&q=#{query}&orTerms=score,rating,review"
+            response = URI.open("https://www.googleapis.com/customsearch/v1?cx=e520e7d4bb4cf4945&key=#{API_KEY}&start=#{(level * 10) + 1}&q=#{query}&orTerms=score,rating,review")
             json = JSON.parse(response.read)
 
             hostname_bucket_limit = 5

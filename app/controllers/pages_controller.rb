@@ -16,9 +16,10 @@ class PagesController < ApplicationController
     @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).page params[:page]
     puts @reviewers.count
     all_review_links = get_reviewers_for_product params[:query], params[:category]
-    all_review_links.each {|k,v| puts "#{k} #{v}\n"} 
+
+    # Get product information for every website found.
     @products_map = get_products all_review_links, params[:category]
-    puts @products_map
+    puts @products_map.to_yaml
   end
 
   private
@@ -34,6 +35,10 @@ class PagesController < ApplicationController
     # hostname_to_reviews_map = search_reviews params[:category], urls, query
     hostname_to_reviews_map = Hash.new
     populate_reviews_for_hostname_map urls, query, category, hostname_to_reviews_map, 0, 0
+    puts
+    puts "Reviews found per hostname"
+    puts JSON.pretty_generate(hostname_to_reviews_map)
+    puts
     
     # Transform search api to only get the first review on a product
     # hostname_to_reviews_map.each {|key,value| hostname_to_reviews_map[key] = value[0]}

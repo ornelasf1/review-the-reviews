@@ -12,23 +12,29 @@ module ProductSearch
           pool.post do
             # hostname to product map is keyed with hostname without path because reviewers store only hostname
             hostname_without_path = get_hostname hostname
+            puts "Cleaned up hostname from #{hostname} to #{hostname_without_path}"
             scraper = ScraperFactory.getscraper hostname
             if scraper.blank?
+              puts "Scraper is blank for #{hostname}."
               hostname_to_product_map[hostname_without_path] = Product.new(initial_source: urls[0])
               next
             end
             product = nil
             initial_source = nil # We want to know the initial source to show in the product reviews page the first attempted url - it's likely a relavent helpful url even though it mightve failed to be scraped
-            for url in urls do
+            urls.each_with_index do |url, index|
+              puts
+              puts "H: #{hostname_without_path} URL ##{index}: Attempting to find product in #{url}"
               if initial_source.blank?
+                puts "Setting initial source for #{hostname} to #{url}."
                 initial_source = url
               end
               product = scraper.getproduct(category.to_sym, url)
               if product.available?
-                puts "#{hostname} - found product in #{url}"
+                puts "Found product in #{url} for #{hostname}"
                 break
               end
-              puts "#{hostname} - attempted #{url}"
+              puts "No product found for #{hostname} in #{url}."
+              puts
             end
             product.initial_source = initial_source
             hostname_to_product_map[hostname_without_path] = product
@@ -39,6 +45,7 @@ module ProductSearch
     end
 
     def populate_reviews_for_hostname_map urls, query, category, final_hostname_to_reviews_map, stack_max, page_level
+        require 'json'
         puts "========"
         if urls.blank?
           puts "no more urls"
@@ -53,8 +60,8 @@ module ProductSearch
           puts "No more results"
           return
         end
-        puts 'analyze hostname_to_reviews_map'
-        puts hostname_to_reviews_map
+        puts "URLs found for search query '#{query}' with category #{category}."
+        puts JSON.pretty_generate(hostname_to_reviews_map)
         puts
         hostname_to_reviews_map.each do |hostname, url_buckets|
           if final_hostname_to_reviews_map.has_key? hostname
@@ -64,9 +71,6 @@ module ProductSearch
           end
           final_hostname_to_reviews_map[hostname].uniq!
         end
-        puts 'analyze final_hostname_to_reviews_map'
-        puts final_hostname_to_reviews_map
-        puts
         puts "old urls: #{urls}"
         new_urls = urls.reject do |url| 
           final_hostname_to_reviews_map.has_key? url and final_hostname_to_reviews_map[url].size >= 3

@@ -17,7 +17,7 @@ class ScraperFactory
         'digitaltrends' => DigitaltrendsScraper,
         'edmunds' => EdmundsScraper,
         'kbb' => KbbScraper,
-        'nhtsa' => NHTSAScraper,
+        'nhtsa' => NhtsaScraper,
         'jdpower' => JdpowerScraper,
         'caranddriver' => CaranddriverScraper,
     }

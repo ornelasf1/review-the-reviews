@@ -8,7 +8,7 @@ class IgnScraper < Scraper
     def self.getname doc, category
         case category
         when :videogames, :movies
-            doc.css(".title4")[0].inner_text
+            doc.css(".title4, .display-title")[0].inner_text
         when :tv
             doc.css(".display-title.jsx-2978383395")[0].inner_text
         when :technology
