@@ -40,6 +40,7 @@ module ProductSearch
             hostname_to_product_map[hostname_without_path] = product
           end
         end
+        pool.shutdown
         pool.wait_for_termination 10
         hostname_to_product_map
     end

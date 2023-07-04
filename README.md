@@ -21,6 +21,13 @@ rake tailwindcss:build
 ```
 The built tailwind css file is `public/css/style.css`
 
+### Redis Server
+Start the redis server in Docker with the following cmd:
+```
+docker run --name rdr-redis -d -p 6379:6379 redis
+```
+The database is used to cache web pages and hash maps that store online search results consisting of review urls.
+
 ### Notes
 Things you may want to cover:
 

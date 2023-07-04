@@ -80,3 +80,4 @@ gem "omniauth-rails_csrf_protection"
 
 gem "kaminari"
 gem "watir"
+gem "redis"

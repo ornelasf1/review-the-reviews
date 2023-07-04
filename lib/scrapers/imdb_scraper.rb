@@ -7,7 +7,7 @@ class ImdbScraper < Scraper
 
     def self.getname doc, category
         case category
-        when :movies
+        when :movies, :tv
             doc.css(".sc-afe43def-0.hnYaOZ, .sc-afe43def-1.fDTGTb")[0].inner_text
         else
             nil
@@ -16,7 +16,7 @@ class ImdbScraper < Scraper
 
     def self.getscore doc, category
         case category
-        when :movies
+        when :movies, :tv
             doc.css(".rating-bar__base-button .sc-bde20123-2.gYgHoj span")[0].inner_text.to_f
         else
             nil

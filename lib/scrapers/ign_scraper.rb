@@ -10,7 +10,7 @@ class IgnScraper < Scraper
         when :videogames, :movies
             doc.css(".title4, .display-title")[0].inner_text
         when :tv
-            doc.css(".display-title.jsx-2978383395")[0].inner_text
+            doc.css(".display-title")[0].inner_text
         when :technology
             doc.css(".title5.jsx-1676601084.box-title")[0].inner_text
         else
@@ -23,9 +23,9 @@ class IgnScraper < Scraper
         when :videogames, :movies
             doc.css(".review-score figcaption")[0].inner_text.to_f
         when :tv
-            doc.css(".review-score.hexagon-wrapper.jsx-3557151949.small span figcaption")[0].inner_text.to_f
+            doc.css(".review-score.hexagon-wrapper span figcaption")[0].inner_text.to_f
         when :technology
-            doc.css(".review-score.hexagon-wrapper.jsx-2261199557.xxlarge span figcaption")[0].inner_text.to_f
+            doc.css(".review-score.hexagon-wrapper span figcaption")[0].inner_text.to_f
         else
             nil
         end

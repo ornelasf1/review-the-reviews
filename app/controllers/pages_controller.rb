@@ -9,13 +9,16 @@ class PagesController < ApplicationController
   end
 
   def search
-    @reviewer = search_reviewer_by_name params[:query]
+    sanitized_query = params[:query].strip
+    sanitized_query.squeeze!
+    sanitized_query.delete "\n"
+    @reviewer = search_reviewer_by_name sanitized_query
     unless @reviewer.blank?
       return redirect_to @reviewer
     end
     @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).page params[:page]
     puts @reviewers.count
-    all_review_links = get_reviewers_for_product params[:query], params[:category]
+    all_review_links = get_reviewers_for_product sanitized_query, params[:category]
 
     # Get product information for every website found.
     @products_map = get_products all_review_links, params[:category]
@@ -33,9 +36,29 @@ class PagesController < ApplicationController
         next reviewer.hostname + reviewer_category.path
       end
     end
-    # hostname_to_reviews_map = search_reviews params[:category], urls, query
+
     hostname_to_reviews_map = Hash.new
-    populate_reviews_for_hostname_map urls, query, category, hostname_to_reviews_map, 0, 0
+    uncached_urls = []
+    urls.each do |url|
+      cache_key="#{url} #{query} #{category}"
+      if REDIS.exists? cache_key
+        puts "Retrieving review urls for '#{cache_key}' from cache."
+        hostname_to_reviews_map[url] = JSON.parse(REDIS.get cache_key)
+      else
+        uncached_urls.append url
+      end
+    end
+
+    populate_reviews_for_hostname_map uncached_urls, query, category, hostname_to_reviews_map, 0, 0
+
+    hostname_to_reviews_map.each do |hostname, url_buckets|
+      cache_key="#{hostname} #{query} #{category}"
+      if not REDIS.exists? cache_key
+        puts "Storing '#{cache_key}' into cache."
+        REDIS.set cache_key, url_buckets.to_json
+      end
+    end
+
     puts
     puts "Reviews found per hostname"
     puts JSON.pretty_generate(hostname_to_reviews_map)
