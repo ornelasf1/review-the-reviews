@@ -16,7 +16,8 @@ class PagesController < ApplicationController
     unless @reviewer.blank?
       return redirect_to @reviewer
     end
-    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category]).page params[:page]
+    
+    @reviewers = Reviewer.joins(:categories).where('categories.name = ?', params[:category])
     puts @reviewers.count
     all_review_links = get_reviewers_for_product sanitized_query, params[:category]
 
@@ -24,6 +25,10 @@ class PagesController < ApplicationController
     @products_map = get_products all_review_links, params[:category]
     puts @products_map.to_yaml
     puts
+
+    # Show all reviewers that have rated the product first
+    @reviewers = @reviewers.sort_by { |reviewer| @products_map.has_key?(reviewer.hostname) && ! @products_map[reviewer.hostname].score.blank? ? 0 : 1 }
+    @reviewers = Kaminari.paginate_array(@reviewers).page(params[:page]).per(10)
   end
 
   private
@@ -41,7 +46,7 @@ class PagesController < ApplicationController
     uncached_urls = []
     urls.each do |url|
       cache_key="#{url} #{query} #{category}"
-      if REDIS.exists? cache_key
+      if not REDIS.blank? and REDIS.exists? cache_key
         puts "Retrieving review urls for '#{cache_key}' from cache."
         hostname_to_reviews_map[url] = JSON.parse(REDIS.get cache_key)
       else
@@ -53,7 +58,7 @@ class PagesController < ApplicationController
 
     hostname_to_reviews_map.each do |hostname, url_buckets|
       cache_key="#{hostname} #{query} #{category}"
-      if not REDIS.exists? cache_key
+      if not REDIS.blank? and not REDIS.exists? cache_key
         puts "Storing '#{cache_key}' into cache."
         REDIS.set cache_key, url_buckets.to_json
       end
@@ -64,8 +69,6 @@ class PagesController < ApplicationController
     puts JSON.pretty_generate(hostname_to_reviews_map)
     puts
     
-    # Transform search api to only get the first review on a product
-    # hostname_to_reviews_map.each {|key,value| hostname_to_reviews_map[key] = value[0]}
     hostname_to_reviews_map
   end
 
