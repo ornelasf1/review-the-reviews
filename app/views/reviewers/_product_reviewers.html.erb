@@ -23,7 +23,7 @@
                             <% if product.present? && product.available? %>
                                 <%= link_to "#{params[:query]} review", product.source, class: 'z-10 text-blue-500 hover:underline', target: "_blank" %>
                             <% elsif product.present? && product.initial_source.present? %>
-                                <%= link_to "#{params[:query]} review", product.initial_source, class: 'z-10 text-blue-500 hover:underline', target: "_blank" %>
+                                <%= link_to "#{params[:query]} article", product.initial_source, class: 'z-10 text-blue-500 hover:underline', target: "_blank" %>
                             <% else %>
                                 <footer class="hidden"></footer>
                             <% end %>

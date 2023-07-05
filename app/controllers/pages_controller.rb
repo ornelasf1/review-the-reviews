@@ -27,7 +27,7 @@ class PagesController < ApplicationController
     puts
 
     # Show all reviewers that have rated the product first
-    @reviewers = @reviewers.sort_by { |reviewer| @products_map.has_key?(reviewer.hostname) && ! @products_map[reviewer.hostname].score.blank? ? 0 : 1 }
+    @reviewers = @reviewers.sort_by { |reviewer| @products_map.has_key?(reviewer.hostname) && ! @products_map[reviewer.hostname].score.blank? && ! @products_map[reviewer.hostname].name.blank? ? 0 : 1 }
     @reviewers = Kaminari.paginate_array(@reviewers).page(params[:page]).per(10)
   end
 
