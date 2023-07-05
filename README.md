@@ -17,6 +17,7 @@ Have Docker installed. Pull Redis docker image
 ```
 docker pull redis
 ```
+To use encrypted secrets, obtain the master key and store in `config/master.key`
 
 ## Start dev environment
 *Note: Because Foreman is broken, we have to use 2 cmd prompts. Foreman is used to start multiple services at once. Normally Foreman is ran by running the script `bin/dev`*
