@@ -18,7 +18,7 @@ class CommonsensemediaScraper < Scraper
         case category
         when :movies, :games, :tv
             container = doc.css(".review-rating .rating__score")[0]
-            container.css('.icon-star-rating.active').size.to_i
+            container.css('.icon-star-solid.active').size.to_i
         else
             nil
         end

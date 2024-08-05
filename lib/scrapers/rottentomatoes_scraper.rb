@@ -10,7 +10,7 @@ class RottentomatoesScraper < Scraper
         when :movies, :tv
             queries = [
                 lambda {
-                    doc.css(".scoreboard__title, .title")[0].inner_text
+                    doc.css("[slot='titleIntro'] rt-text span")[0].inner_text
                 },
             ]
             getdata queries, "name"
@@ -24,7 +24,7 @@ class RottentomatoesScraper < Scraper
         when :movies, :tv
             queries = [
                 lambda {
-                    doc.css(".scoreboard, #scoreboard")[0]['tomatometerscore'].to_i
+                    doc.css("[slot='criticsScore'] rt-text")[0].inner_text.tr("%","")
                 },
             ]
             getdata queries, "score"

@@ -1,7 +1,7 @@
 class Scraper
     require 'nokogiri'
     require 'open-uri'
-    require 'watir'
+    # require 'watir'
 
     # How to use
     # Create a scraper that inherits this class. The child scraper can define getname and getscore, 
@@ -62,6 +62,9 @@ class Scraper
                 return Nokogiri::HTML5(REDIS.get(url))
             else
                 puts "Loading #{url} and storing into cache."
+                # WATIR = Watir::Browser.new :firefox, headless: true
+                # WATIR.goto url
+                # document = Nokogiri::HTML5(WATIR.html)
                 document = Nokogiri::HTML5(URI.open(url, user_agent))
                 document.css("script", "style").remove
                 REDIS.set(url, document.to_html)
