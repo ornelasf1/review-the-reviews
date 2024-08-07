@@ -1,4 +1,5 @@
-# README
+## Demo
+[![Watch the video](https://img.youtube.com/vi/Fq5W8dxCKzA/maxresdefault.jpg)](https://youtu.be/Fq5W8dxCKzA)
 
 ## Setup
 Have Ruby 3.1.3 installed. Download from: https://rubyinstaller.org/downloads/archives/
