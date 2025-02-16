@@ -1,5 +1,3 @@
-![alt text](https://github.com/ornelasf1/reviewthereviewers/blob/main/screenshot1.png?raw=true)
-
 # 🚀 About
 
 ReviewDReviewers allows users to review the reviewers, ensuring that you get genuine and reliable feedback!
@@ -9,6 +7,18 @@ Now you can see which reviewers are trustworthy and whose opinions truly matter.
 - Easily identify the most credible reviewers and avoid misleading feedback.
 - Build a community of trust where authentic reviews are rewarded.
 - Engage with fellow users, share experiences, and contribute to a more transparent review ecosystem.
+
+### 📸 Front page
+
+![rdr webapp](./screenshot1.png)
+
+### 📸 Video Game Reviewers
+
+![rdr webapp2](./screenshot2.png)
+
+### 📸 Feedback for popular reviewing website, IGN
+
+![rdr webapp3](./screenshot3.png)
 
 ## 🔥Demo
 
