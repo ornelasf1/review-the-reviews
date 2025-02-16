@@ -1,4 +1,6 @@
-# 🚀 About
+# ReviewDReviewers - Someone's got to review the reviewers too!
+
+## 🚀 About
 
 ReviewDReviewers allows users to review the reviewers, ensuring that you get genuine and reliable feedback!
 
