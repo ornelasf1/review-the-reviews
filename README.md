@@ -1,4 +1,4 @@
-# ReviewDReviewers - Someone's got to review the reviewers too!
+# ReviewDReviewers - Someone's got to criticize them too!
 
 ## 🚀 About
 
